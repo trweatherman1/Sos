@@ -10,17 +10,17 @@ import java.util.Arrays;
 
 public class SosBoard {
 
-    // TODO: Make fields
+
     private char board[][];
     private int  empty;
 
-    // TODO: Finish this method
+
     public SosBoard(int size) {
         board = new char [size][size];
         initBoard();
     }
 
-    // TODO: Finish this method
+
     private void initBoard() {
         // WRITE ME
         Scanner input = new Scanner(System.in);
@@ -33,7 +33,7 @@ public class SosBoard {
         }
     }
 
-    // TODO: Given
+
     public boolean setSpot(int row, int col, char icon) {
         boolean result = false;
         icon = Character.toUpperCase(icon);
@@ -48,8 +48,8 @@ public class SosBoard {
         return result;
     }
 
-    // We are making the assumption that this array has the same number of rows and columns.
-    // TODO: Finish this method
+
+
     public boolean isFull() {
 
         int count = 0;
@@ -74,12 +74,12 @@ public class SosBoard {
         }
     }
 
-    // TODO: Given
+
     public int calculatePoints(int row, int col) {
         return checkCompass(row, col) + checkDiag(row, col);
     }
 
-    // TODO: Finish this method
+
     public boolean inBounds(int num) {
         if(num >= 0 && num < board.length)
         {
@@ -91,12 +91,10 @@ public class SosBoard {
         }
     }
 
-    // TODO: Finish this method
+
     public int checkCompass(int row, int col) {
         int points = 0;
 
-
-        // YOUR CODE GOES HERE
         if(board[row][col] == 'O' || board[row][col] == 'o')
         {
             if(inBounds(row+1) && inBounds(row - 1))
@@ -151,9 +149,60 @@ public class SosBoard {
         return points;
     }
 
-    // TODO: You do not have to complete this
+
     public int checkDiag(int row, int col) {
         int points = 0;
+        if(board[row][col] == 'O' || board[row][col] == 'o')
+        {
+            if(inBounds(row+1) && inBounds(row - 1))
+            {
+                if(board[row + 1][col] == 'S' && board[row - 1][col] == 'S')
+                {
+                    points++;
+                }
+            }
+            if(inBounds(col + 1) && inBounds(col - 1))
+            {
+                if(board[row][col - 1] == 'S' && board[row][col + 1] == 'S')
+                {
+                    points++;
+                }
+            }
+        }
+        if(board[row][col] == 'S' || board[row][col] == 's')
+        {
+
+            if(inBounds(row + 2))
+            {
+                if(board[row + 1][col + 1] == 'O' && board[row +  2][col + 2] == 'S')
+                {
+                    points++;
+                }
+            }
+            if(inBounds(row - 2))
+            {
+                if(board[row - 1][col -1] == 'O' && board[row -  2][col - 2] == 'S')
+                {
+                    points++;
+                }
+
+            }
+            if(inBounds(col + 2))
+            {
+                if(board[row + 1][col + 1] == 'O' && board[row + 2][col + 2] == 'S')
+                {
+                    points++;
+                }
+            }
+            if(inBounds(col - 2))
+            {
+                if(board[row - 1][col - 1] == 'O' && board[row - 2][col - 2] == 'S')
+                {
+                    points++;
+                }
+            }
+
+        }
         return points;
     }
 

@@ -9,19 +9,19 @@ import java.util.Scanner;
 
 public class Game {
     /** Current player. From 0 to n */
-    private int                 player;
+    private int player;
 
     /** Hold the scores of all the players */
-    private int[]               scores;
+    private int[] scores;
 
     /** The sos board */
-    private SosBoard            board;
+    private SosBoard board;
 
     /** For input */
-    private Scanner             scanIn;
+    private Scanner scanIn;
 
     /** Current allowed number of players */
-    private static final int    PLAYERS = 2;
+    private static final int  PLAYERS = 2;
 
     /**
      * Initialize everything for a new game of SOS. Player 0 always goes first.
@@ -29,7 +29,7 @@ public class Game {
     public Game() {
         player = 0;
         scores = new int[PLAYERS];
-        board  = new SosBoard(3);   // TODO: allow user to enter this via keyboard
+        board  = new SosBoard(3);
         scanIn = new Scanner(System.in);
     }
 
@@ -46,7 +46,7 @@ public class Game {
         } while(!board.isFull());
 
 
-        // QUESTION: What is the problem with the how the winner is determined?
+
         int highScore = 0;
         for (int i = 1; i < PLAYERS; i++) {
             if (scores[i] > scores[highScore])
