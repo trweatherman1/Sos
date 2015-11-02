@@ -1,6 +1,5 @@
 package Common;
 
-import Common.MessageSource;
 
 /**
  * This class is responsible for sending/receiving messages over the network
@@ -9,7 +8,7 @@ import Common.MessageSource;
  * @author Trent Weatherman
  * @version 02/11/2015
  */
-public class NetworkInterface extends MessageSource implements Runnable{
+public class NetworkInterface extends MessageSource implements Runnable {
     /**
      * When an object implementing interface <code>Runnable</code> is used
      * to create a thread, starting the thread causes the object's
