@@ -1,3 +1,5 @@
+package Server.Game;
+
 import java.util.Scanner;
 
 /**

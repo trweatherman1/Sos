@@ -1,5 +1,6 @@
+package Server.Game;
+
 import java.util.Scanner;
-import java.util.Arrays;
 
 /**
  * Models and SOS board
