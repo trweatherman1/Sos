@@ -1,3 +1,5 @@
+package Common;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,19 +41,21 @@ public abstract class MessageSource {
     }
 
     protected void closeMessageSource() {
-        // Here we need to iterate over a *copy* of our messageListeners list.
-        // The reason is because if the listener’s ’sourceClosed’ method
-        // removes that listener from this subject, we’d get a
-        // ConcurrentModificationException if we were iterating over the
-        // original list.
+        /* Here we need to iterate over a *copy* of our messageListeners list.
+         The reason is because if the listener’s ’sourceClosed’ method
+         removes that listener from this subject, we’d get a
+         ConcurrentModificationException if we were iterating over the
+         original list.
+        */
         for (MessageListener listener : new
                 ArrayList<MessageListener>(messageListeners)) {
             try {
                 listener.sourceClosed(this);
             } catch (RuntimeException ex) {
-                // Ignore any exceptions encountered when trying to close
-                // a source. There’s a similar rationale here as we had
-                // with ignoring exceptions when we tried to close streams.
+                /* Ignore any exceptions encountered when trying to close
+                 a source. There’s a similar rationale here as we had
+                 with ignoring exceptions when we tried to close streams.
+                */
             }
         }
         messageListeners.clear();
