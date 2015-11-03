@@ -8,4 +8,9 @@ package Server;
  * @version 02/11/2015
  */
 public class MultiuserSosServerDriver {
+    public static void main(String args[]) {
+        MultiuserSosServer multiuserSosServer = new MultiuserSosServer(5019);
+        multiuserSosServer.listen();
+
+    }
 }

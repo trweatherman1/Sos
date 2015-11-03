@@ -11,6 +11,9 @@ import java.util.List;
  * @version 1.0
  */
 public abstract class MessageSource {
+    /** This is the name of the MessageSource */
+    private String name;
+
     /** This is the <code>MessageListeners</code> waiting for messages */
     private List<MessageListener> messageListeners;
 
@@ -74,4 +77,7 @@ public abstract class MessageSource {
         messageListeners.clear();
     }
 
+    public String getName() {
+        return this.name;
+    }
 }

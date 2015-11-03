@@ -7,5 +7,5 @@ package Client;
  * @author Trent Weatherman
  * @version 02/11/2015
  */
-public class MultiuserSosServerDriver {
+public class MultiuserSosClientDriver {
 }
