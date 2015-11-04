@@ -70,6 +70,7 @@ public class MultiuserSosClient extends MessageSource implements
                     .getOutputStream(), socket.getInputStream());
             Thread clientThread = new Thread(this.networkInterface);
             clientThread.start();
+            networkInterface.addMessageListener(this);
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -3,11 +3,14 @@ package Server;
 import Common.MessageListener;
 import Common.MessageSource;
 import Common.NetworkInterface;
+
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * This class implements the server side logic for the SOS server
@@ -19,7 +22,7 @@ import java.util.List;
 public class MultiuserSosServer implements MessageListener {
 
     /** the list of connected players */
-    private List<NetworkInterface> players;
+    private Map<String, NetworkInterface> connectedPlayers;
 
     /** the list of potential players */
     private List<NetworkInterface> potentialPlayers;
@@ -35,7 +38,8 @@ public class MultiuserSosServer implements MessageListener {
      * @param port the desired port for the server
      */
     public MultiuserSosServer(int port) {
-        this.players = new ArrayList<NetworkInterface>();
+        this.potentialPlayers = new ArrayList<NetworkInterface>();
+        this.connectedPlayers = new HashMap<String, NetworkInterface>();
         this.port = port;
     }
 
@@ -60,7 +64,8 @@ public class MultiuserSosServer implements MessageListener {
                         (connectedClient.getOutputStream(),connectedClient
                                 .getInputStream());
                 Thread clientThread = new Thread(clientInterface);
-                players.add(clientInterface);
+                potentialPlayers.add(clientInterface);
+                clientInterface.addMessageListener(this);
                 clientThread.start();
             }
             //close the serverSocket
@@ -72,9 +77,10 @@ public class MultiuserSosServer implements MessageListener {
 
     @Override
     public void messageReceived(String message, MessageSource source) {
-        for(NetworkInterface player: players) {
+        System.out.println("Message Received");
+        for(NetworkInterface player: potentialPlayers) {
             player.sendMessage(message);
-            System.out.println("Sending Players " + message);
+            System.out.println("Sending Players: " + message);
         }
     }
 

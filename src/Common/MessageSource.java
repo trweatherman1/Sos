@@ -11,8 +11,6 @@ import java.util.List;
  * @version 1.0
  */
 public abstract class MessageSource {
-    /** This is the name of the MessageSource */
-    private String name;
 
     /** This is the <code>MessageListeners</code> waiting for messages */
     private List<MessageListener> messageListeners;
@@ -42,7 +40,7 @@ public abstract class MessageSource {
         for (MessageListener listener : new ArrayList<MessageListener>
                 (messageListeners)) {
             /* We wrap this in a try/catch block so that just in case one of
-            our observers screwas up, we don't want to stop notifying other
+            our observers screws up, we don't want to stop notifying other
             observers.
              */
             try {
@@ -75,9 +73,5 @@ public abstract class MessageSource {
             }
         }
         messageListeners.clear();
-    }
-
-    public String getName() {
-        return this.name;
     }
 }

@@ -1,7 +1,5 @@
 package Common;
 
-import Common.MessageSource;
-
 /**
  * This is an interface implemented by objects that receive messages.
  *
