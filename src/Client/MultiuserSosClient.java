@@ -66,8 +66,10 @@ public class MultiuserSosClient extends MessageSource implements
     public void playGame() {
         try {
             Socket socket = new Socket(InetAddress.getByName(this.ip), this.port);
-            NetworkInterface clientInterface = new NetworkInterface(socket
+            this.networkInterface = new NetworkInterface(socket
                     .getOutputStream(), socket.getInputStream());
+            Thread clientThread = new Thread(this.networkInterface);
+            clientThread.start();
         } catch (IOException e) {
             e.printStackTrace();
         }
