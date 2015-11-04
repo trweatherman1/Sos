@@ -77,10 +77,8 @@ public class MultiuserSosServer implements MessageListener {
 
     @Override
     public void messageReceived(String message, MessageSource source) {
-        System.out.println("Message Received");
         for(NetworkInterface player: potentialPlayers) {
-            player.sendMessage(message);
-            System.out.println("Sending Players: " + message);
+            player.sendMessage("Server: " + message);
         }
     }
 

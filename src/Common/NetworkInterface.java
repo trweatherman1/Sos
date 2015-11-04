@@ -49,7 +49,8 @@ public class NetworkInterface extends MessageSource implements Runnable {
 
     public void sendMessage(String message)  {
         try {
-            send.write(message.getBytes());
+            send.write((message+"\n").getBytes());
+            send.flush();
         } catch (IOException e) {
             e.printStackTrace();
         }

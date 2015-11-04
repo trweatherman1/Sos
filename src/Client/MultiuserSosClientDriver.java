@@ -24,9 +24,8 @@ public class MultiuserSosClientDriver {
             Scanner scanner = new Scanner(System.in);
             String command;
             do {
-                System.out.print("> ");
                 command = scanner.nextLine();
-                multiuserSosClient.sendMessage(command + "\n");
+                multiuserSosClient.sendMessage(command);
             } while(!command.toLowerCase().contains("quit"));
         }
 

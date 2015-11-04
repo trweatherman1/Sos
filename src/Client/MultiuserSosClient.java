@@ -67,10 +67,10 @@ public class MultiuserSosClient extends MessageSource implements
         try {
             Socket socket = new Socket(InetAddress.getByName(this.ip), this.port);
             this.networkInterface = new NetworkInterface(socket
-                    .getOutputStream(), socket.getInputStream());
+                    .getOutputStream(),socket.getInputStream());
+            networkInterface.addMessageListener(this);
             Thread clientThread = new Thread(this.networkInterface);
             clientThread.start();
-            networkInterface.addMessageListener(this);
         } catch (IOException e) {
             e.printStackTrace();
         }
