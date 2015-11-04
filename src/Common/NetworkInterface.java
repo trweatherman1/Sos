@@ -1,11 +1,7 @@
 package Common;
 
 
-import Client.MultiuserSosClient;
-import Server.MultiuserSosServer;
-
 import java.io.*;
-import java.net.Socket;
 
 /**
  * This class is responsible for sending/receiving messages over the network
@@ -16,30 +12,17 @@ import java.net.Socket;
  */
 public class NetworkInterface extends MessageSource implements Runnable {
 
-    /** This is the socket for the client */
-    private Socket clientSocket;
+    /** This is the stream that sends messages out */
+    private OutputStream send;
 
-    /** This is the username for the client */
-    private String name;
+    /** This is the Buffered reader that will receive messages */
+    private BufferedReader receive;
 
-    /** This is the BufferedReader to read from the client */
-    private BufferedReader fromClient;
-
-    /** This is the OutputStream to write to the client*/
-    private OutputStream toClient;
-
-    public NetworkInterface(Socket socket, MultiuserSosServer server) {
-        this.clientSocket = socket;
-        try {
-            this.fromClient = new BufferedReader(new
-                    InputStreamReader(clientSocket.getInputStream()));
-            this.toClient = clientSocket.getOutputStream();
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
-        this.name = "";
-        this.addMessageListener(server);
+    public NetworkInterface(OutputStream send, InputStream receive) {
+        this.send = send;
+        this.receive = new BufferedReader(new InputStreamReader(receive));
     }
+
     /**
      * When an object implementing interface <code>Runnable</code> is used
      * to create a thread, starting the thread causes the object's
@@ -53,23 +36,23 @@ public class NetworkInterface extends MessageSource implements Runnable {
      */
     @Override
     public void run() {
-            String msg;
+        String message;
         try {
-            while((msg = fromClient.readLine()) != null) {
-                this.name = msg;
+            while((message = this.receive.readLine()) != null) {
+                notifyReceipt(message);
             }
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 
-    public void tell(String message) {
+
+    public void sendMessage(String message)  {
         try {
-            toClient.write(message.getBytes());
+            send.write(message.getBytes());
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
     }
-
 
 }
