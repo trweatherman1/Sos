@@ -9,7 +9,7 @@ package Server.Commands;
  * @author Trent Weatherman
  * @version 05/11/2015
  */
-public class AbstractCommand {
+public abstract class AbstractCommand {
 
     /** This is the array of command arguments for the command */
     private String[] commandArgs;
