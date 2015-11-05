@@ -76,6 +76,7 @@ public class MultiuserSosServer implements MessageListener {
 
     @Override
     public void messageReceived(String message, MessageSource source) {
+        parseCommand(message);
         for(NetworkInterface player: potentialPlayers) {
             player.sendMessage("Server: " + message);
         }
@@ -83,6 +84,10 @@ public class MultiuserSosServer implements MessageListener {
 
     @Override
     public void sourceClosed(MessageSource source) {
+
+    }
+
+    public void parseCommand(String message) {
 
     }
 }
