@@ -31,8 +31,12 @@ public class Game {
     public Game() {
         player = 0;
         scores = new int[PLAYERS];
-        board  = new SosBoard(3);
+
         scanIn = new Scanner(System.in);
+        System.out.println("Enter the size of the board");
+        int size = scanIn.nextInt();
+        board  = new SosBoard(size);
+        //scanIn = new Scanner(System.in);
     }
 
     /**

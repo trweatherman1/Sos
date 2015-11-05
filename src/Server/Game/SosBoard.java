@@ -11,13 +11,15 @@ import java.util.Scanner;
 
 public class SosBoard {
 
-
+    /**A 2d array that will be the game board*/
     private char board[][];
-    private int  empty;
+    /**an integer value that will be empty*/
+    private int empty;
 
 
     public SosBoard(int size) {
         board = new char [size][size];
+        empty = 0;
         initBoard();
     }
 
@@ -35,6 +37,15 @@ public class SosBoard {
     }
 
 
+    /**
+     *
+     * A method that sets the spot of the game board with either an S or an O
+     *
+     * @param row
+     * @param col
+     * @param icon
+     * @return
+     */
     public boolean setSpot(int row, int col, char icon) {
         boolean result = false;
         icon = Character.toUpperCase(icon);
@@ -50,7 +61,11 @@ public class SosBoard {
     }
 
 
-
+    /**
+     * A boolean method that checks to see if the board is full
+     *
+     * @return
+     */
     public boolean isFull() {
 
         int count = 0;
@@ -75,12 +90,25 @@ public class SosBoard {
         }
     }
 
-
+    /**
+     *
+     * A method that calculates the number of points given if a player makes sos
+     *
+     * @param row
+     * @param col
+     * @return
+     */
     public int calculatePoints(int row, int col) {
         return checkCompass(row, col) + checkDiag(row, col);
     }
 
 
+    /**
+     * A boolean method that makes sure that the game is played in bounds of the board
+     *
+     * @param num
+     * @return
+     */
     public boolean inBounds(int num) {
         if(num >= 0 && num < board.length)
         {
@@ -153,6 +181,7 @@ public class SosBoard {
 
     public int checkDiag(int row, int col) {
         int points = 0;
+        /*
         if(board[row][col] == 'O' || board[row][col] == 'o')
         {
             if(inBounds(row+1) && inBounds(row - 1))
@@ -204,6 +233,7 @@ public class SosBoard {
             }
 
         }
+        */
         return points;
     }
 
