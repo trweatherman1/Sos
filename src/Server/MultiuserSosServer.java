@@ -3,6 +3,10 @@ package Server;
 import Common.MessageListener;
 import Common.MessageSource;
 import Common.NetworkInterface;
+import Server.Commands.AbstractCommand;
+import Server.Commands.CommandExecutable;
+import Server.Commands.ConnectCommand;
+
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -76,7 +80,7 @@ public class MultiuserSosServer implements MessageListener {
 
     @Override
     public void messageReceived(String message, MessageSource source) {
-        parseCommand(message);
+        parseCommand(message,source);
         for(NetworkInterface player: potentialPlayers) {
             player.sendMessage("Server: " + message);
         }
@@ -87,7 +91,23 @@ public class MultiuserSosServer implements MessageListener {
 
     }
 
-    public void parseCommand(String message) {
+    public void parseCommand(String message, MessageSource source) {
+        AbstractCommand command;
+        String[] parsedCommand = message.split(" ");
+        switch(parsedCommand[0]) {
+            case "/connect":
+                command = new ConnectCommand(parsedCommand);
+                command.execute(this,source);
+        }
+    }
 
+    public boolean addConnectedClient(String username, MessageSource source) {
+        boolean added = false;
+        if(!connectedPlayers.containsKey(username) && !connectedPlayers
+                .containsValue(source)) {
+            this.connectedPlayers.put(username, (NetworkInterface) source);
+            added = true;
+        }
+        return added;
     }
 }

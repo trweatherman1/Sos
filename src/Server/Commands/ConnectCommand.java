@@ -1,0 +1,40 @@
+package Server.Commands;
+
+import Common.MessageSource;
+import Server.MultiuserSosServer;
+
+/**
+ * This class is the command associated with connecting a user to the game
+ * server
+ *
+ * @author Daniel Powell
+ * @author Trent Weatherman
+ * @version 06/11/2015
+ */
+public class ConnectCommand extends AbstractCommand {
+
+    /**
+     * This constructor takes in an array with the required inputs for
+     * execution
+     *
+     * @param commandArgs the array of arguments for execution
+     */
+    public ConnectCommand(String[] commandArgs) {
+        super(commandArgs);
+    }
+
+    /**
+     * This method executes the command
+     */
+    @Override
+    public void execute(MultiuserSosServer server, MessageSource source) {
+        String desiredUsername = commandArgs[1];
+        boolean added = server.addConnectedClient(desiredUsername,source);
+        if(added) {
+            server.messageReceived(desiredUsername + " has connected", null);
+        } else {
+            server.messageReceived(desiredUsername + " is in use already or " +
+                    "this connection has already been made", null);
+        }
+    }
+}

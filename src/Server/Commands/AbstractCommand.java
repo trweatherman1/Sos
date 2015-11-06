@@ -9,16 +9,18 @@ package Server.Commands;
  * @author Trent Weatherman
  * @version 05/11/2015
  */
-public abstract class AbstractCommand {
+public abstract class AbstractCommand implements CommandExecutable{
 
     /** This is the array of command arguments for the command */
-    private String[] commandArgs;
+    protected String[] commandArgs;
 
+    /**
+     * This constructor takes in an array of String arguments which can be
+     * variable in size, for all commands
+     *
+     * @param commandArgs the String commands for execution
+     */
     public AbstractCommand(String[] commandArgs) {
         this.commandArgs = commandArgs;
-    }
-
-    public void execute() {
-
     }
 }
