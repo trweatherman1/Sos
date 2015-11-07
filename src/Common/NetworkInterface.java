@@ -47,6 +47,12 @@ public class NetworkInterface extends MessageSource implements Runnable {
     }
 
 
+    /**
+     * This method sends a message out via the Output Stream to the class
+     * using this interface
+     *
+     * @param message the message to send
+     */
     public void sendMessage(String message)  {
         try {
             send.write((message+"\n").getBytes());

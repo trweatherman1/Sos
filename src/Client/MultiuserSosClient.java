@@ -49,23 +49,47 @@ public class MultiuserSosClient extends MessageSource implements
         this.port = port;
     }
 
+    /**
+     * This method will handle messages being sent to the implementer of this
+     * interface
+     *
+     * @param message the message received
+     * @param source the source of the message
+     */
     @Override
     public void messageReceived(String message, MessageSource source) {
         System.out.println(message);
     }
 
+    /**
+     * This method handles a message source closing and the clean up that is
+     * needed
+     *
+     * @param source the source that is closing
+     */
     @Override
     public void sourceClosed(MessageSource source) {
 
     }
 
+    /**
+     * This method sends out a message to its NetworkInterface between it and
+     * the server
+     *
+     * @param message the message to send
+     */
     public void sendMessage(String message) {
         networkInterface.sendMessage(message);
     }
 
+    /**
+     * This method starts up a socket and creates a NetworkInterface to act
+     * between it and the server
+     */
     public void playGame() {
         try {
-            Socket socket = new Socket(InetAddress.getByName(this.ip), this.port);
+            Socket socket = new Socket(InetAddress.getByName(this.ip),
+                    this.port);
             this.networkInterface = new NetworkInterface(socket
                     .getOutputStream(),socket.getInputStream());
             networkInterface.addMessageListener(this);
