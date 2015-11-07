@@ -14,7 +14,8 @@ import Server.MultiuserSosServer;
 public interface CommandExecutable {
     /**
      * This method executes a command on behalf of a server
-     * @param server the server to execute the command for
+     *
+     * @param server        the server to execute the command for
      * @param messageSource the source of the command
      */
     void execute(MultiuserSosServer server, MessageSource messageSource);

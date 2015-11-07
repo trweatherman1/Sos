@@ -18,7 +18,7 @@ public class MultiuserSosClientDriver {
                     "<host ip> |port|");
         } else {
             MultiuserSosClient multiuserSosClient = new MultiuserSosClient
-                    (args[0], args.length == 2?Integer.parseInt(args[1]):
+                    (args[0], args.length == 2 ? Integer.parseInt(args[1]) :
                             ProgramConstants.DEFAULTPORT);
             multiuserSosClient.playGame();
             Scanner scanner = new Scanner(System.in);
@@ -26,7 +26,7 @@ public class MultiuserSosClientDriver {
             do {
                 command = scanner.nextLine();
                 multiuserSosClient.sendMessage(command);
-            } while(!command.toLowerCase().contains("quit"));
+            } while (!command.toLowerCase().contains("quit"));
         }
 
     }

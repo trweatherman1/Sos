@@ -1,7 +1,6 @@
 package Server.Commands;
 
 import Common.MessageSource;
-import Server.Game.Game;
 import Server.MultiuserSosServer;
 
 /**
@@ -29,8 +28,8 @@ public class PlayCommand extends AbstractCommand {
      * @param messageSource the source the command comes from
      */
     @Override
-    public void execute(MultiuserSosServer server, MessageSource messageSource){
-        if(server.numConnectedClients() < 3) {
+    public void execute(MultiuserSosServer server, MessageSource messageSource) {
+        if (server.numConnectedClients() < 3) {
             server.broadcast("Not enough players for a game");
         } else {
             server.setupGame();

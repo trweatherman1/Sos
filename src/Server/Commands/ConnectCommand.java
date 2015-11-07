@@ -25,12 +25,13 @@ public class ConnectCommand extends AbstractCommand {
 
     /**
      * This method executes the connect command
+     *
      * @param server the server to execute the command for
      * @param source the source of the command
      */
     @Override
     public void execute(MultiuserSosServer server, MessageSource source) {
         String desiredUsername = commandArgs[1];
-        server.addConnectedClient(desiredUsername,source);
+        server.addConnectedClient(desiredUsername, source);
     }
 }

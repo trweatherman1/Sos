@@ -12,10 +12,14 @@ import java.io.*;
  */
 public class NetworkInterface extends MessageSource implements Runnable {
 
-    /** This is the stream that sends messages out */
+    /**
+     * This is the stream that sends messages out
+     */
     private OutputStream send;
 
-    /** This is the Buffered reader that will receive messages */
+    /**
+     * This is the Buffered reader that will receive messages
+     */
     private BufferedReader receive;
 
     public NetworkInterface(OutputStream send, InputStream receive) {
@@ -38,7 +42,7 @@ public class NetworkInterface extends MessageSource implements Runnable {
     public void run() {
         String message;
         try {
-            while((message = this.receive.readLine()) != null) {
+            while ((message = this.receive.readLine()) != null) {
                 notifyReceipt(message);
             }
         } catch (IOException e) {
@@ -53,9 +57,9 @@ public class NetworkInterface extends MessageSource implements Runnable {
      *
      * @param message the message to send
      */
-    public void sendMessage(String message)  {
+    public void sendMessage(String message) {
         try {
-            send.write((message+"\n").getBytes());
+            send.write((message + "\n").getBytes());
             send.flush();
         } catch (IOException e) {
             e.printStackTrace();

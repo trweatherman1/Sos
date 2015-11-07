@@ -5,6 +5,7 @@ import Common.MessageSource;
 import Common.NetworkInterface;
 import Server.Commands.*;
 import Server.Game.Game;
+
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -22,13 +23,19 @@ import java.util.Map;
  */
 public class MultiuserSosServer implements MessageListener {
 
-    /** the list of connected players */
+    /**
+     * the list of connected players
+     */
     private Map<String, NetworkInterface> connectedPlayers;
 
-    /** the list of potential players */
+    /**
+     * the list of potential players
+     */
     private List<NetworkInterface> potentialPlayers;
 
-    /** This is the current game for the server */
+    /**
+     * This is the current game for the server
+     */
     private Game currentGame;
 
     /**
@@ -42,8 +49,8 @@ public class MultiuserSosServer implements MessageListener {
      * @param port the desired port for the server
      */
     public MultiuserSosServer(int port) {
-        this.potentialPlayers = new ArrayList<NetworkInterface>();
-        this.connectedPlayers = new HashMap<String, NetworkInterface>();
+        this.potentialPlayers = new ArrayList<>();
+        this.connectedPlayers = new HashMap<>();
         this.port = port;
     }
 
@@ -65,7 +72,7 @@ public class MultiuserSosServer implements MessageListener {
                 /* A new socket that connects the client */
                 Socket connectedClient = serverSocket.accept();
                 NetworkInterface clientInterface = new NetworkInterface
-                        (connectedClient.getOutputStream(),connectedClient
+                        (connectedClient.getOutputStream(), connectedClient
                                 .getInputStream());
                 Thread clientThread = new Thread(clientInterface);
                 potentialPlayers.add(clientInterface);
@@ -74,7 +81,7 @@ public class MultiuserSosServer implements MessageListener {
             }
             //close the serverSocket
             serverSocket.close();
-        } catch (IOException e) {
+        } catch (IOException ignore) {
 
         }
     }
@@ -84,11 +91,11 @@ public class MultiuserSosServer implements MessageListener {
      * and passes it onto the parseCommand method
      *
      * @param message the message received
-     * @param source the source of the message
+     * @param source  the source of the message
      */
     @Override
     public void messageReceived(String message, MessageSource source) {
-        parseCommand(message,source);
+        parseCommand(message, source);
     }
 
     /**
@@ -107,28 +114,32 @@ public class MultiuserSosServer implements MessageListener {
      * This method determines what command is being called in a message
      *
      * @param message the message that may be a command
-     * @param source the source of the message
+     * @param source  the source of the message
      */
     public void parseCommand(String message, MessageSource source) {
         AbstractCommand command;
-        String[] parsedCommand = message.split("\\w+");
-        switch(parsedCommand[0].toLowerCase()) {
-            case "/connect":
-                command = new ConnectCommand(parsedCommand);
-                break;
-            case "/play":
-                command = new PlayCommand(parsedCommand);
-                break;
-            case "/move":
-                command = new MoveCommand(parsedCommand);
-                break;
-            case "/quit":
-                command = new QuitCommand(parsedCommand);
-                break;
-            default:
-                command = new InvalidCommand(parsedCommand);
+        String[] parsedCommand = message.split("\\s+");
+        if (parsedCommand.length > 0) {
+            switch (parsedCommand[0]) {
+                case "/connect":
+                    command = new ConnectCommand(parsedCommand);
+                    break;
+                case "/play":
+                    command = new PlayCommand(parsedCommand);
+                    break;
+                case "/move":
+                    command = new MoveCommand(parsedCommand);
+                    break;
+                case "/quit":
+                    command = new QuitCommand(parsedCommand);
+                    break;
+                default:
+                    command = new InvalidCommand(parsedCommand);
+            }
+            command.execute(this, source);
+        } else {
+            privateMessage("Invalid Command", source);
         }
-        command.execute(this,source);
     }
 
     /**
@@ -136,24 +147,22 @@ public class MultiuserSosServer implements MessageListener {
      * does not already exist, and the MessageSource is not already in the list
      *
      * @param username the desired username for the player
-     * @param source the source of the connection
-     *
-     * @return a boolean that is true if the client was added
+     * @param source   the source of the connection
      */
     public void addConnectedClient(String username, MessageSource source) {
         String message = "";
-        if(connectedPlayers.containsKey(username)) {
+        if (connectedPlayers.containsKey(username)) {
             message += username + " is already in use";
         }
-        if(connectedPlayers.containsValue(source)) {
+        if (connectedPlayers.containsValue(source)) {
             message += " This source is already in use";
         }
-        if(!connectedPlayers.containsKey(username) && !connectedPlayers
+        if (!connectedPlayers.containsKey(username) && !connectedPlayers
                 .containsValue(source) && source instanceof NetworkInterface) {
             this.connectedPlayers.put(username, (NetworkInterface) source);
             broadcast(username + " has connected");
         } else {
-            privateMessage(message,source);
+            privateMessage(message, source);
         }
     }
 
@@ -173,7 +182,7 @@ public class MultiuserSosServer implements MessageListener {
      * @param message the message to broadcast
      */
     public void broadcast(String message) {
-        for(NetworkInterface player: connectedPlayers.values()) {
+        for (NetworkInterface player : connectedPlayers.values()) {
             player.sendMessage("Server: " + message);
         }
     }
@@ -182,10 +191,10 @@ public class MultiuserSosServer implements MessageListener {
      * This method sends a private message to the source in the parameters
      *
      * @param message the message to send privately
-     * @param source the source to send the message to
+     * @param source  the source to send the message to
      */
     public void privateMessage(String message, MessageSource source) {
-        connectedPlayers.get(source).sendMessage("Server: " + message);
+        ((NetworkInterface) source).sendMessage("Server: " + message);
     }
 
     /**

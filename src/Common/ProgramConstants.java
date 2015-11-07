@@ -8,6 +8,8 @@ package Common;
  */
 public class ProgramConstants {
 
-    /** This is the default port for my server*/
+    /**
+     * This is the default port for my server
+     */
     public static int DEFAULTPORT = 5019;
 }

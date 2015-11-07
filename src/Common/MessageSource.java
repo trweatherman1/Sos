@@ -12,20 +12,28 @@ import java.util.List;
  */
 public abstract class MessageSource {
 
-    /** This is the <code>MessageListeners</code> waiting for messages */
+    /**
+     * This is the <code>MessageListeners</code> waiting for messages
+     */
     private List<MessageListener> messageListeners;
 
-    /** This is the constructor that initializes the <code>ArrayList</code>*/
+    /**
+     * This is the constructor that initializes the <code>ArrayList</code>
+     */
     public MessageSource() {
         this.messageListeners = new ArrayList<MessageListener>();
     }
 
-    /** This method adds a <code>MessageListener</code> the the listeners*/
+    /**
+     * This method adds a <code>MessageListener</code> the the listeners
+     */
     public void addMessageListener(MessageListener listener) {
         messageListeners.add(listener);
     }
 
-    /** This method removes a specified listener from the ArrayList */
+    /**
+     * This method removes a specified listener from the ArrayList
+     */
     public void removeMessageListener(MessageListener listener) {
         messageListeners.remove(listener);
     }

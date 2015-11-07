@@ -4,21 +4,26 @@ import java.util.Scanner;
 
 /**
  * Models and SOS board
- * @author Trent Weatherman 
+ *
+ * @author Trent Weatherman
  * @author Daniel Powell
  * @version 2015
  */
 
 public class SosBoard {
 
-    /**A 2d array that will be the game board*/
+    /**
+     * A 2d array that will be the game board
+     */
     private char board[][];
-    /**an integer value that will be empty*/
+    /**
+     * an integer value that will be empty
+     */
     private int empty;
 
 
     public SosBoard(int size) {
-        board = new char [size][size];
+        board = new char[size][size];
         empty = 0;
         initBoard();
     }
@@ -27,10 +32,8 @@ public class SosBoard {
     private void initBoard() {
         // WRITE ME
         Scanner input = new Scanner(System.in);
-        for(int i = 0; i < board.length; i++)
-        {
-            for(int j = 0; j < board.length; j++)
-            {
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board.length; j++) {
                 board[i][j] = ' ';
             }
         }
@@ -38,7 +41,6 @@ public class SosBoard {
 
 
     /**
-     *
      * A method that sets the spot of the game board with either an S or an O
      *
      * @param row
@@ -49,7 +51,7 @@ public class SosBoard {
     public boolean setSpot(int row, int col, char icon) {
         boolean result = false;
         icon = Character.toUpperCase(icon);
-        if ((icon == 'S' || icon == 'O' ) &&
+        if ((icon == 'S' || icon == 'O') &&
                 row >= 0 && row < board.length && col >= 0 && col < board.length) {
             if (board[row][col] == ' ') {
                 board[row][col] = icon;
@@ -69,29 +71,23 @@ public class SosBoard {
     public boolean isFull() {
 
         int count = 0;
-        for(int i = 0; i < board.length; i++)
-        {
-            for(int j = 0; j < board.length; j++)
-            {
-                if(board[i][j] == (' '))
-                {
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board.length; j++) {
+                if (board[i][j] == (' ')) {
                     count++;
                 }
             }
 
         }
 
-        if(count > 0)
-        {
+        if (count > 0) {
             return false;
-        }
-        else{
+        } else {
             return true;
         }
     }
 
     /**
-     *
      * A method that calculates the number of points given if a player makes sos
      *
      * @param row
@@ -110,19 +106,15 @@ public class SosBoard {
      * @return
      */
     public boolean inBounds(int num) {
-        if(num >= 0 && num < board.length)
-        {
+        if (num >= 0 && num < board.length) {
             return true;
-        }
-        else
-        {
+        } else {
             return false;
         }
     }
 
 
     /**
-     *
      * A method that checks vertically and horizontally if the board spells sos
      *
      * @param row
@@ -132,53 +124,39 @@ public class SosBoard {
     public int checkCompass(int row, int col) {
         int points = 0;
 
-        if(board[row][col] == 'O' || board[row][col] == 'o')
-        {
-            if(inBounds(row+1) && inBounds(row - 1))
-            {
-                if(board[row + 1][col] == 'S' && board[row - 1][col] == 'S')
-                {
+        if (board[row][col] == 'O' || board[row][col] == 'o') {
+            if (inBounds(row + 1) && inBounds(row - 1)) {
+                if (board[row + 1][col] == 'S' && board[row - 1][col] == 'S') {
 
                     points++;
                 }
             }
-            if(inBounds(col + 1) && inBounds(col - 1))
-            {
-                if(board[row][col - 1] == 'S' && board[row][col + 1] == 'S')
-                {
+            if (inBounds(col + 1) && inBounds(col - 1)) {
+                if (board[row][col - 1] == 'S' && board[row][col + 1] == 'S') {
                     points++;
                 }
             }
         }
-        if(board[row][col] == 'S' || board[row][col] == 's')
-        {
+        if (board[row][col] == 'S' || board[row][col] == 's') {
 
-            if(inBounds(row + 2))
-            {
-                if(board[row + 1][col] == 'O' && board[row +  2][col] == 'S')
-                {
+            if (inBounds(row + 2)) {
+                if (board[row + 1][col] == 'O' && board[row + 2][col] == 'S') {
                     points++;
                 }
             }
-            if(inBounds(row - 2))
-            {
-                if(board[row - 1][col] == 'O' && board[row -  2][col] == 'S')
-                {
+            if (inBounds(row - 2)) {
+                if (board[row - 1][col] == 'O' && board[row - 2][col] == 'S') {
                     points++;
                 }
 
             }
-            if(inBounds(col + 2))
-            {
-                if(board[row][col + 1] == 'O' && board[row][col + 2] == 'S')
-                {
+            if (inBounds(col + 2)) {
+                if (board[row][col + 1] == 'O' && board[row][col + 2] == 'S') {
                     points++;
                 }
             }
-            if(inBounds(col - 2))
-            {
-                if(board[row][col - 1] == 'O' && board[row][col - 2] == 'S')
-                {
+            if (inBounds(col - 2)) {
+                if (board[row][col - 1] == 'O' && board[row][col - 2] == 'S') {
                     points++;
                 }
             }
@@ -189,7 +167,6 @@ public class SosBoard {
 
 
     /**
-     *
      * A method that checks diagonally if the board spells sos
      *
      * @param row
@@ -199,42 +176,30 @@ public class SosBoard {
     public int checkDiag(int row, int col) {
         int points = 0;
 
-        if(board[row][col] == 'O' || board[row][col] == 'o')
-        {
-            if(inBounds(row+1) && inBounds(col +1) && inBounds(row - 1) && inBounds(col - 1))
-            {
-                if(board[row + 1][col] == 'S' && board[row - 1][col] == 'S')
-                {
+        if (board[row][col] == 'O' || board[row][col] == 'o') {
+            if (inBounds(row + 1) && inBounds(col + 1) && inBounds(row - 1) && inBounds(col - 1)) {
+                if (board[row + 1][col] == 'S' && board[row - 1][col] == 'S') {
                     System.out.println("This is the testing points 1 " + points);
                     points++;
                 }
-            }
-            else if(inBounds(col + 1) && inBounds(row + 1)&& inBounds(col - 1) && inBounds(row - 1))
-            {
-                if(board[row][col - 1] == 'S' && board[row][col + 1] == 'S')
-                {
+            } else if (inBounds(col + 1) && inBounds(row + 1) && inBounds(col - 1) && inBounds(row - 1)) {
+                if (board[row][col - 1] == 'S' && board[row][col + 1] == 'S') {
                     System.out.println("This is the testing points 2 " + points);
                     points++;
                 }
             }
         }
-        if(board[row][col] == 'S' || board[row][col] == 's')
-        {
+        if (board[row][col] == 'S' || board[row][col] == 's') {
 
-            if(inBounds(row + 2) && inBounds(col + 2))
-            {
-                if(board[row + 1][col + 1] == 'O' || board[row +1][col+1] == 'o' &&
-                        board[row +  2][col + 2] == 'S' ||board[row +  2][col + 2] == 's')
-                {
+            if (inBounds(row + 2) && inBounds(col + 2)) {
+                if (board[row + 1][col + 1] == 'O' || board[row + 1][col + 1] == 'o' &&
+                        board[row + 2][col + 2] == 'S' || board[row + 2][col + 2] == 's') {
                     System.out.println("This is the testing points 3 " + points);
                     points++;
                 }
-            }
-            else if(inBounds(row - 2) && inBounds(col - 2))
-            {
-                if(board[row - 1][col -1] == 'O' || board[row - 1][col -1] == 'o' &&
-                        board[row -  2][col - 2] == 'S' ||board[row -  2][col - 2] == 's')
-                {
+            } else if (inBounds(row - 2) && inBounds(col - 2)) {
+                if (board[row - 1][col - 1] == 'O' || board[row - 1][col - 1] == 'o' &&
+                        board[row - 2][col - 2] == 'S' || board[row - 2][col - 2] == 's') {
                     System.out.println("This is the testing points 4 " + points);
                     points++;
                 }
@@ -266,6 +231,7 @@ public class SosBoard {
 
     /**
      * Prints out the first and/or last line in the sos board.
+     *
      * @return the first/last line of a matrix.
      */
     private String getDivider() {
@@ -279,6 +245,7 @@ public class SosBoard {
 
     /**
      * Prints out divider lines between playing spaces.
+     *
      * @return divider lines between rows of values.
      */
     private String getEdge() {

@@ -10,7 +10,7 @@ import Server.MultiuserSosServer;
  * @author Trent Weatherman
  * @version 06/11/2015
  */
-public class QuitCommand  extends AbstractCommand{
+public class QuitCommand extends AbstractCommand {
     /**
      * This constructor takes in an array of String arguments which can be
      * variable in size, for all commands

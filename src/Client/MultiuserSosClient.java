@@ -19,13 +19,19 @@ import java.net.Socket;
 public class MultiuserSosClient extends MessageSource implements
         MessageListener {
 
-    /** This is the ip of the server */
+    /**
+     * This is the ip of the server
+     */
     private String ip;
 
-    /** This is the port of the server */
+    /**
+     * This is the port of the server
+     */
     private int port;
 
-    /** This is the NetworkInterface for the client */
+    /**
+     * This is the NetworkInterface for the client
+     */
     private NetworkInterface networkInterface;
 
     /**
@@ -41,7 +47,7 @@ public class MultiuserSosClient extends MessageSource implements
      * This is the constructor for the client that specifies the port and ip
      * address
      *
-     * @param ip the IP address of the server
+     * @param ip   the IP address of the server
      * @param port the port of the server
      */
     public MultiuserSosClient(String ip, int port) {
@@ -54,7 +60,7 @@ public class MultiuserSosClient extends MessageSource implements
      * interface
      *
      * @param message the message received
-     * @param source the source of the message
+     * @param source  the source of the message
      */
     @Override
     public void messageReceived(String message, MessageSource source) {
@@ -91,7 +97,7 @@ public class MultiuserSosClient extends MessageSource implements
             Socket socket = new Socket(InetAddress.getByName(this.ip),
                     this.port);
             this.networkInterface = new NetworkInterface(socket
-                    .getOutputStream(),socket.getInputStream());
+                    .getOutputStream(), socket.getInputStream());
             networkInterface.addMessageListener(this);
             Thread clientThread = new Thread(this.networkInterface);
             clientThread.start();

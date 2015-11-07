@@ -30,8 +30,10 @@ public class InvalidCommand extends AbstractCommand implements
      * @param messageSource the source of the command
      */
     @Override
-    public void execute(MultiuserSosServer server, MessageSource messageSource){
-        server.messageReceived(commandArgs.toString() + " is not a valid " +
-                "command.",null);
+    public void execute(MultiuserSosServer server, MessageSource messageSource) {
+        String message = String.join(" ", commandArgs) + " is not a valid " +
+                "command.";
+        server.broadcast(message);
+        server.privateMessage(message, messageSource);
     }
 }

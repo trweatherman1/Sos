@@ -4,26 +4,37 @@ import java.util.Scanner;
 
 /**
  * Models a game of SOS
+ *
  * @author Trent Weatherman
  * @author Daniel Powell
  * @version 2015
  */
 
 public class Game {
-    /** Current player. From 0 to n */
+    /**
+     * Current player. From 0 to n
+     */
     private int player;
 
-    /** Hold the scores of all the players */
+    /**
+     * Hold the scores of all the players
+     */
     private int[] scores;
 
-    /** The sos board */
+    /**
+     * The sos board
+     */
     private SosBoard board;
 
-    /** For input */
+    /**
+     * For input
+     */
     private Scanner scanIn;
 
-    /** Current allowed number of players */
-    private static final int  PLAYERS = 2;
+    /**
+     * Current allowed number of players
+     */
+    private static final int PLAYERS = 2;
 
     /**
      * Initialize everything for a new game of SOS. Player 0 always goes first.
@@ -35,7 +46,7 @@ public class Game {
         scanIn = new Scanner(System.in);
         System.out.println("Enter the size of the board");
         int size = scanIn.nextInt();
-        board  = new SosBoard(size);
+        board = new SosBoard(size);
         //scanIn = new Scanner(System.in);
     }
 
@@ -49,8 +60,7 @@ public class Game {
             makeMove();
             changePlayer();
             displayScore();
-        } while(!board.isFull());
-
+        } while (!board.isFull());
 
 
         int highScore = 0;
@@ -73,7 +83,7 @@ public class Game {
     }
 
     /**
-     * Determines whos turn it is 
+     * Determines whos turn it is
      */
     private void changePlayer() {
         // QUESTION: What in the world is going on here?
@@ -99,7 +109,7 @@ public class Game {
             done = board.setSpot(row, col, icon);
 
             msg = "Invalid move, try again\n";
-        } while(!done);
+        } while (!done);
 
         // If we get here the player made a valid move and we see if the got any points. 
         scores[player] += board.calculatePoints(row, col);
@@ -107,6 +117,7 @@ public class Game {
 
     /**
      * Entry point into this program.
+     *
      * @param args Not used.
      */
     public static void main(String[] args) {

@@ -13,7 +13,7 @@ public interface MessageListener {
      * interface
      *
      * @param message the message received
-     * @param source the source of the message
+     * @param source  the source of the message
      */
     public void messageReceived(String message, MessageSource source);
 

@@ -9,9 +9,11 @@ package Server.Commands;
  * @author Trent Weatherman
  * @version 05/11/2015
  */
-public abstract class AbstractCommand implements CommandExecutable{
+public abstract class AbstractCommand implements CommandExecutable {
 
-    /** This is the array of command arguments for the command */
+    /**
+     * This is the array of command arguments for the command
+     */
     protected String[] commandArgs;
 
     /**
