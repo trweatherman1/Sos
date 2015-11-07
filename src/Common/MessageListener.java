@@ -15,7 +15,7 @@ public interface MessageListener {
      * @param message the message received
      * @param source  the source of the message
      */
-    public void messageReceived(String message, MessageSource source);
+    void messageReceived(String message, MessageSource source);
 
     /**
      * This method handles a message source closing and the clean up that is
@@ -23,5 +23,5 @@ public interface MessageListener {
      *
      * @param source the source that is closing
      */
-    public void sourceClosed(MessageSource source);
+    void sourceClosed(MessageSource source);
 }

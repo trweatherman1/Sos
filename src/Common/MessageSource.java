@@ -21,7 +21,7 @@ public abstract class MessageSource {
      * This is the constructor that initializes the <code>ArrayList</code>
      */
     public MessageSource() {
-        this.messageListeners = new ArrayList<MessageListener>();
+        this.messageListeners = new ArrayList<>();
     }
 
     /**
@@ -45,7 +45,7 @@ public abstract class MessageSource {
      * @param message the message received
      */
     protected void notifyReceipt(String message) {
-        for (MessageListener listener : new ArrayList<MessageListener>
+        for (MessageListener listener : new ArrayList<>
                 (messageListeners)) {
             /* We wrap this in a try/catch block so that just in case one of
             our observers screws up, we don't want to stop notifying other
@@ -70,7 +70,7 @@ public abstract class MessageSource {
          original list.
         */
         for (MessageListener listener : new
-                ArrayList<MessageListener>(messageListeners)) {
+                ArrayList<>(messageListeners)) {
             try {
                 listener.sourceClosed(this);
             } catch (RuntimeException ex) {
