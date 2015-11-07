@@ -31,12 +31,6 @@ public class ConnectCommand extends AbstractCommand {
     @Override
     public void execute(MultiuserSosServer server, MessageSource source) {
         String desiredUsername = commandArgs[1];
-        boolean added = server.addConnectedClient(desiredUsername,source);
-        if(added) {
-            server.messageReceived(desiredUsername + " has connected", null);
-        } else {
-            server.messageReceived(desiredUsername + " is in use already or " +
-                    "this connection has already been made", null);
-        }
+        server.addConnectedClient(desiredUsername,source);
     }
 }

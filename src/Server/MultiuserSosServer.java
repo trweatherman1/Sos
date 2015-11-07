@@ -4,7 +4,7 @@ import Common.MessageListener;
 import Common.MessageSource;
 import Common.NetworkInterface;
 import Server.Commands.*;
-
+import Server.Game.Game;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -27,6 +27,9 @@ public class MultiuserSosServer implements MessageListener {
 
     /** the list of potential players */
     private List<NetworkInterface> potentialPlayers;
+
+    /** This is the current game for the server */
+    private Game currentGame;
 
     /**
      * The port the server lives on
@@ -86,9 +89,6 @@ public class MultiuserSosServer implements MessageListener {
     @Override
     public void messageReceived(String message, MessageSource source) {
         parseCommand(message,source);
-        for(NetworkInterface player: potentialPlayers) {
-            player.sendMessage("Server: " + message);
-        }
     }
 
     /**
@@ -99,7 +99,8 @@ public class MultiuserSosServer implements MessageListener {
      */
     @Override
     public void sourceClosed(MessageSource source) {
-
+        source.removeMessageListener(this);
+        this.connectedPlayers.remove(source);
     }
 
     /**
@@ -139,14 +140,21 @@ public class MultiuserSosServer implements MessageListener {
      *
      * @return a boolean that is true if the client was added
      */
-    public boolean addConnectedClient(String username, MessageSource source) {
-        boolean added = false;
-        if(!connectedPlayers.containsKey(username) && !connectedPlayers
-                .containsValue(source)) {
-            this.connectedPlayers.put(username, (NetworkInterface) source);
-            added = true;
+    public void addConnectedClient(String username, MessageSource source) {
+        String message = "";
+        if(connectedPlayers.containsKey(username)) {
+            message += username + " is already in use";
         }
-        return added;
+        if(connectedPlayers.containsValue(source)) {
+            message += " This source is already in use";
+        }
+        if(!connectedPlayers.containsKey(username) && !connectedPlayers
+                .containsValue(source) && source instanceof NetworkInterface) {
+            this.connectedPlayers.put(username, (NetworkInterface) source);
+            broadcast(username + " has connected");
+        } else {
+            privateMessage(message,source);
+        }
     }
 
     /**
@@ -156,5 +164,34 @@ public class MultiuserSosServer implements MessageListener {
      */
     public int numConnectedClients() {
         return connectedPlayers.size();
+    }
+
+    /**
+     * This method broadcasts to all connectedPlayers, ones that have called
+     * the connect command successfully
+     *
+     * @param message the message to broadcast
+     */
+    public void broadcast(String message) {
+        for(NetworkInterface player: connectedPlayers.values()) {
+            player.sendMessage("Server: " + message);
+        }
+    }
+
+    /**
+     * This method sends a private message to the source in the parameters
+     *
+     * @param message the message to send privately
+     * @param source the source to send the message to
+     */
+    public void privateMessage(String message, MessageSource source) {
+        connectedPlayers.get(source).sendMessage("Server: " + message);
+    }
+
+    /**
+     * This method sets up the SOS game
+     */
+    public void setupGame() {
+
     }
 }
