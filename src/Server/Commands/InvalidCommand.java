@@ -4,20 +4,22 @@ import Common.MessageSource;
 import Server.MultiuserSosServer;
 
 /**
- * This class executes the play command so players can start a game of SOS
+ * This command is used to respond to players who have entered an invalid
+ * command
  *
  * @author Daniel Powell
  * @author Trent Weatherman
- * @version 06/11/2015
+ * @version 07/11/2015
  */
-public class PlayCommand extends AbstractCommand {
+public class InvalidCommand extends AbstractCommand implements
+        CommandExecutable {
     /**
      * This constructor takes in an array of String arguments which can be
      * variable in size, for all commands
      *
      * @param commandArgs the String commands for execution
      */
-    public PlayCommand(String[] commandArgs) {
+    public InvalidCommand(String[] commandArgs) {
         super(commandArgs);
     }
 
@@ -25,14 +27,11 @@ public class PlayCommand extends AbstractCommand {
      * This method executes a command on behalf of a server
      *
      * @param server        the server to execute the command for
-     * @param messageSource the source the command comes from
+     * @param messageSource the source of the command
      */
     @Override
     public void execute(MultiuserSosServer server, MessageSource messageSource){
-        if(server.numConnectedClients() < 3) {
-
-        } else {
-
-        }
+        server.messageReceived(commandArgs.toString() + " is not a valid " +
+                "command.",null);
     }
 }
