@@ -201,6 +201,48 @@ public class SosBoard {
         return points;
     }
 
+    private boolean hasNorth(char[][] board,int row, int column, String
+            letter) {
+        return letter.toLowerCase().equals('o')?inBounds(row + 1):inBounds
+                (row+2);
+    }
+
+    private boolean hasSouth(char[][] board,int row, int column, String
+            letter) {
+        return letter.toLowerCase().equals('o')?inBounds(row + 1):inBounds
+                (row+2);
+    }
+
+    private boolean hasWest(char[][] board,int row, int column, String
+            letter) {
+        return letter.toLowerCase().equals('o')?inBounds(row + 1):inBounds
+            (row+2);
+    }
+
+    private boolean hasEast(char[][] board,int row, int column, String
+            letter) {
+        return letter.toLowerCase().equals('o')?inBounds(row + 1):inBounds
+                (row+2);
+    }
+
+    private boolean hasNW(char[][] board,int row, int column, String
+            letter) {
+        return hasNorth(board,row,column,letter) && hasWest(board,row,column,
+                letter);
+    }private boolean hasSW(char[][] board,int row, int column, String
+            letter) {
+        return hasSouth(board,row,column,letter) && hasWest(board,row,column,
+                letter);
+    }private boolean hasNE(char[][] board,int row, int column, String
+            letter) {
+        return hasNorth(board,row,column,letter) && hasEast(board,row,column,
+                letter);
+    }private boolean hasSE(char[][] board,int row, int column, String
+            letter) {
+        return hasSouth(board,row,column,letter) && hasEast(board,row,column,
+                letter);
+    }
+
 /*##########################################################################################
   # Do not modify under this divider                                                       #
   ##########################################################################################*/
