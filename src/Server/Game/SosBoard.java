@@ -171,12 +171,12 @@ public class SosBoard {
     public int checkDiag(int row, int col) {
         int points = 0;
         if (board[row][col] == 'O' || board[row][col] == 'o') {
-            if (inBounds(row + 1) && inBounds(col + 1) || inBounds(row - 1) && inBounds(col - 1)) {
+            if (inBounds(row + 1) && inBounds(col + 1) && inBounds(row - 1) && inBounds(col - 1)) {
                 if (board[row + 1][col] == 'S' && board[row - 1][col] == 'S') {
                     System.out.println("This is the testing points 1 " + points);
                     points++;
                 }
-            } else if (inBounds(col + 1) && inBounds(row + 1) || inBounds(col - 1) && inBounds(row - 1)) {
+            } else if (inBounds(col + 1) && inBounds(row + 1) && inBounds(col - 1) && inBounds(row - 1)) {
                 if (board[row][col - 1] == 'S' && board[row][col + 1] == 'S') {
                     System.out.println("This is the testing points 2 " + points);
                     points++;
@@ -184,15 +184,13 @@ public class SosBoard {
             }
         }
         if (board[row][col] == 'S' || board[row][col] == 's') {
-            if (inBounds(row + 2) && inBounds(col + 2)) {
-                if (board[row + 1][col + 1] == 'O' || board[row + 1][col + 1] == 'o' &&
-                        board[row + 2][col + 2] == 'S' || board[row + 2][col + 2] == 's') {
+            if (inBounds(row - 2) && inBounds(col - 2)) {
+                if (board[row - 1][col - 1] == 'O' && board[row - 2][col - 2] == 'S'){
                     System.out.println("This is the testing points 3 " + points);
                     points++;
                 }
-            } else if (inBounds(row - 2) && inBounds(col - 2)) {
-                if (board[row - 1][col - 1] == 'O' || board[row - 1][col - 1] == 'o' &&
-                        board[row - 2][col - 2] == 'S' || board[row - 2][col - 2] == 's') {
+            } else if (inBounds(row - 2) && inBounds(col + 2)) {
+                if (board[row - 1][col + 1] == 'O' && board[row - 2][col + 2] == 'S') {
                     System.out.println("This is the testing points 4 " + points);
                     points++;
                 }
