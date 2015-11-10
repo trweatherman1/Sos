@@ -9,7 +9,7 @@ import java.util.Scanner;
  *
  * @author Trent Weatherman
  * @author Daniel Powell
- * @version 2015
+ * @version 11/10/2015
  */
 
 public class Game {
@@ -40,18 +40,19 @@ public class Game {
         //numPlayers = scanIn.nextInt();
         scores = new int[numPlayers];
         //System.out.println("Enter the size of the board");
-        int size = scanIn.nextInt();
-        board = new SosBoard(size);
+        //int size = scanIn.nextInt();
+
+        //board = new SosBoard(size);
         //scanIn = new Scanner(System.in);
     }
 
     /**
      * The method where game play takes place until the board is full.
      */
-    public void go() {
+    public void go(int size) {
 
         do {
-            //System.out.println(board);
+            board = new SosBoard(size);
             toString();
             makeMove();
             changePlayer();
@@ -66,8 +67,9 @@ public class Game {
         }
 
         System.out.println("The winner is: Player " + highScore);
-
     }
+
+
 
     /**
      * Print the current score of all players to standard out.
@@ -89,22 +91,15 @@ public class Game {
     /**
      * Allow a player to make a valid move.
      */
-    public void makeMove() {
+    public void makeMove(int row, int col, char icon) {
         boolean done = false;
-        int row = -1;
-        int col = -1;
+        //int row = -1;
+        //int col = -1;
         String msg = "";
         do {
-            //System.out.print(msg);
-            //System.out.print("Player " + player + " choose a row and column >");
-            row = scanIn.nextInt();
-            col = scanIn.nextInt();
 
-            //System.out.print("\nWould you like to play 'S' or 'O' >");
-            char icon = scanIn.next().toUpperCase().charAt(0);
-
+            //icon = scanIn.next().toUpperCase().charAt(0);
             done = board.setSpot(row, col, icon);
-
             msg = "Invalid move, try again\n";
         } while (!done);
 
@@ -126,10 +121,12 @@ public class Game {
      * Entry point into this program.
      *
      * @param args Not used.
-     */
+
     public static void main(String[] args) {
         Game driver = new Game();
-        driver.go();
+        size = Integer.parseInt(args[1]);
+        driver.go(size);
     }
+    */
 
 }

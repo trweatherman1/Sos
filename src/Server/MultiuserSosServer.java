@@ -44,6 +44,9 @@ public class MultiuserSosServer implements MessageListener {
      */
     private int port;
 
+    /**size of the board*/
+    int size;
+
     /**
      * This constructor initializes the port for the server to live on
      *
@@ -203,7 +206,7 @@ public class MultiuserSosServer implements MessageListener {
      * This method sets up the SOS game
      */
     public void setupGame() {
-        currentGame.go();
+        currentGame.go(size);
     }
 
     public void getGame(){
