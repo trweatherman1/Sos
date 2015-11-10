@@ -8,7 +8,7 @@ import Server.MultiuserSosServer;
  *
  * @author Daniel Powell
  * @author Trent Weatherman
- * @version 06/11/2015
+ * @version 11/10/2015
  */
 public class QuitCommand extends AbstractCommand {
     /**

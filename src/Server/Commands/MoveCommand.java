@@ -20,6 +20,7 @@ public class MoveCommand extends AbstractCommand {
      */
     public MoveCommand(String[] commandArgs) {
         super(commandArgs);
+
     }
 
     /**
@@ -29,7 +30,8 @@ public class MoveCommand extends AbstractCommand {
      * @param messageSource the source the command comes from
      */
     @Override
-    public void execute(MultiuserSosServer server, MessageSource messageSource) {
-
+    public void execute(MultiuserSosServer server, MessageSource messageSource)
+    {
+        server.getGame();
     }
 }

@@ -29,7 +29,7 @@ public class PlayCommand extends AbstractCommand {
      */
     @Override
     public void execute(MultiuserSosServer server, MessageSource messageSource) {
-        if (server.numConnectedClients() < 3) {
+        if (server.numConnectedClients() < 2) {
             server.broadcast("Not enough players for a game");
         } else {
             server.setupGame();

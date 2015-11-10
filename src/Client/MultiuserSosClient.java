@@ -14,7 +14,7 @@ import java.net.Socket;
  *
  * @author Daniel Powell
  * @author Trent Weatherman
- * @version 02/11/2015
+ * @version 11/10/2015
  */
 public class MultiuserSosClient extends MessageSource implements
         MessageListener {

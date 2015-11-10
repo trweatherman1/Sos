@@ -5,6 +5,7 @@ import Common.MessageSource;
 import Common.NetworkInterface;
 import Server.Commands.*;
 import Server.Game.Game;
+import com.sun.corba.se.spi.activation.Server;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -19,7 +20,7 @@ import java.util.Map;
  *
  * @author Daniel Powell
  * @author Trent Weatherman
- * @version 02/11/2015
+ * @version 11/10/2015
  */
 public class MultiuserSosServer implements MessageListener {
 
@@ -52,6 +53,7 @@ public class MultiuserSosServer implements MessageListener {
         this.potentialPlayers = new ArrayList<>();
         this.connectedPlayers = new HashMap<>();
         this.port = port;
+        this.currentGame = new Game();
     }
 
     /**
@@ -201,6 +203,10 @@ public class MultiuserSosServer implements MessageListener {
      * This method sets up the SOS game
      */
     public void setupGame() {
+        currentGame.go();
+    }
 
+    public void getGame(){
+        currentGame.makeMove();
     }
 }

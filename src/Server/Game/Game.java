@@ -1,5 +1,7 @@
 package Server.Game;
 
+import Common.MessageListener;
+
 import java.util.Scanner;
 
 /**
@@ -11,52 +13,46 @@ import java.util.Scanner;
  */
 
 public class Game {
-    /**
-     * Current player. From 0 to n
-     */
+    /** Current player. From 0 to n*/
     private int player;
 
-    /**
-     * Hold the scores of all the players
-     */
+    /**Hold the scores of all the players */
     private int[] scores;
 
-    /**
-     * The sos board
-     */
+    /** The sos board*/
     private SosBoard board;
 
-    /**
-     * For input
-     */
+    /** For input from the user*/
     private Scanner scanIn;
 
-    /**
-     * Current allowed number of players
-     */
-    private static final int PLAYERS = 2;
+    /** Current allowed number of player */
+    private int numPlayers;
 
     /**
      * Initialize everything for a new game of SOS. Player 0 always goes first.
      */
     public Game() {
         player = 0;
-        scores = new int[PLAYERS];
-
         scanIn = new Scanner(System.in);
-        System.out.println("Enter the size of the board");
+
+
+        //System.out.println("Enter the number of players");
+        //numPlayers = scanIn.nextInt();
+        scores = new int[numPlayers];
+        //System.out.println("Enter the size of the board");
         int size = scanIn.nextInt();
         board = new SosBoard(size);
         //scanIn = new Scanner(System.in);
     }
 
     /**
-     * The method where gameplay takes place until the board is full.
+     * The method where game play takes place until the board is full.
      */
     public void go() {
 
         do {
-            System.out.println(board);
+            //System.out.println(board);
+            toString();
             makeMove();
             changePlayer();
             displayScore();
@@ -64,7 +60,7 @@ public class Game {
 
 
         int highScore = 0;
-        for (int i = 1; i < PLAYERS; i++) {
+        for (int i = 1; i < numPlayers; i++) {
             if (scores[i] > scores[highScore])
                 highScore = i;
         }
@@ -76,8 +72,8 @@ public class Game {
     /**
      * Print the current score of all players to standard out.
      */
-    private void displayScore() {
-        for (int current = 0; current < PLAYERS; current++) {
+    public void displayScore() {
+        for (int current = 0; current < numPlayers; current++) {
             System.out.println("Player " + current + " has a score of " + scores[current]);
         }
     }
@@ -85,27 +81,28 @@ public class Game {
     /**
      * Determines whos turn it is
      */
-    private void changePlayer() {
+    public void changePlayer() {
         // QUESTION: What in the world is going on here?
-        player = (player + 1) % PLAYERS;
+        player = (player + 1) % numPlayers;
     }
 
     /**
      * Allow a player to make a valid move.
      */
-    private void makeMove() {
+    public void makeMove() {
         boolean done = false;
         int row = -1;
         int col = -1;
         String msg = "";
         do {
-            System.out.print(msg);
-            System.out.print("Player " + player + " choose a row and column >");
+            //System.out.print(msg);
+            //System.out.print("Player " + player + " choose a row and column >");
             row = scanIn.nextInt();
             col = scanIn.nextInt();
 
-            System.out.print("\nWould you like to play 'S' or 'O' >");
+            //System.out.print("\nWould you like to play 'S' or 'O' >");
             char icon = scanIn.next().toUpperCase().charAt(0);
+
             done = board.setSpot(row, col, icon);
 
             msg = "Invalid move, try again\n";
@@ -113,6 +110,16 @@ public class Game {
 
         // If we get here the player made a valid move and we see if the got any points. 
         scores[player] += board.calculatePoints(row, col);
+    }
+
+    /**
+     * A method that will print out the board we want
+     * @return text that will be designated for the board
+     */
+    public String toString(){
+        String text = "";
+        text += board;
+        return text;
     }
 
     /**
