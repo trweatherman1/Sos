@@ -123,36 +123,37 @@ public class SosBoard {
      */
     public int checkCompass(int row, int col) {
         int points = 0;
-        if (board[row][col] == 'O' || board[row][col] == 'o') {
-            if (inBounds(row + 1) && inBounds(row - 1)) {
-                if (board[row + 1][col] == 'S' && board[row - 1][col] == 'S') {
+        char letter = Character.toLowerCase(board[row][col]);
+        if (letter == 'o') {
+            if (hasNorth(row,letter) && hasSouth(row,letter)) {
+                if (hasO(board[row + 1][col],board[row - 1][col])) {
                     points++;
                 }
             }
-            if (inBounds(col + 1) && inBounds(col - 1)) {
-                if (board[row][col - 1] == 'S' && board[row][col + 1] == 'S') {
+            if (hasEast(col,letter) && hasWest(col,letter)) {
+                if (hasO(board[row][col - 1],board[row][col + 1])) {
                     points++;
                 }
             }
         }
-        if (board[row][col] == 'S' || board[row][col] == 's') {
-            if (inBounds(row + 2)) {
-                if (board[row + 1][col] == 'O' && board[row + 2][col] == 'S') {
+        if (letter == 's') {
+            if (hasNorth(row, letter)) {
+                if (hasS(board[row + 1][col],board[row + 2][col])) {
                     points++;
                 }
             }
-            if (inBounds(row - 2)) {
-                if (board[row - 1][col] == 'O' && board[row - 2][col] == 'S') {
+            if (hasSouth(row,letter)) {
+                if (hasS(board[row - 1][col],board[row - 2][col])) {
                     points++;
                 }
             }
-            if (inBounds(col + 2)) {
-                if (board[row][col + 1] == 'O' && board[row][col + 2] == 'S') {
+            if (hasEast(col,letter)) {
+                if (hasS(board[row][col + 1],board[row][col + 2])) {
                     points++;
                 }
             }
-            if (inBounds(col - 2)) {
-                if (board[row][col - 1] == 'O' && board[row][col - 2] == 'S') {
+            if (hasWest(col,letter)) {
+                if (hasS(board[row][col - 1],board[row][col - 2])) {
                     points++;
                 }
             }
@@ -170,28 +171,36 @@ public class SosBoard {
      */
     public int checkDiag(int row, int col) {
         int points = 0;
-        if (board[row][col] == 'O' || board[row][col] == 'o') {
-            if (inBounds(row + 1) && inBounds(col + 1) && inBounds(row - 1) && inBounds(col - 1)) {
-                if (board[row + 1][col] == 'S' && board[row - 1][col] == 'S') {
-                    System.out.println("This is the testing points 1 " + points);
+        char letter = Character.toLowerCase(board[row][col]);
+        if (letter == 'o') {
+            if (hasSE(row,col,letter) && hasNW(row,col,letter)) {
+                if (hasO(board[row + 1][col],board[row - 1][col]) ) {
                     points++;
                 }
-            } else if (inBounds(col + 1) && inBounds(row + 1) && inBounds(col - 1) && inBounds(row - 1)) {
-                if (board[row][col - 1] == 'S' && board[row][col + 1] == 'S') {
-                    System.out.println("This is the testing points 2 " + points);
+            } else if (hasSW(row,col,letter) && hasNE(row,col,letter)) {
+                if (hasO(board[row][col - 1],board[row][col + 1])) {
                     points++;
                 }
             }
         }
-        if (board[row][col] == 'S' || board[row][col] == 's') {
-            if (inBounds(row - 2) && inBounds(col - 2)) {
-                if (board[row - 1][col - 1] == 'O' && board[row - 2][col - 2] == 'S'){
-                    System.out.println("This is the testing points 3 " + points);
+        if (letter == 's') {
+            if (hasNW(row,col,letter)) {
+                if (hasS(board[row - 1][col - 1],board[row - 2][col - 2])){
                     points++;
                 }
-            } else if (inBounds(row - 2) && inBounds(col + 2)) {
-                if (board[row - 1][col + 1] == 'O' && board[row - 2][col + 2] == 'S') {
-                    System.out.println("This is the testing points 4 " + points);
+            }
+            if (hasNE(row,col,letter)) {
+                if (hasS(board[row - 1][col + 1],board[row - 2][col + 2])) {
+                    points++;
+                }
+            }
+            if (hasSE(row,col,letter)) {
+                if (hasS(board[row+1][col+1],board[row+2][col+2])) {
+                    points++;
+                }
+            }
+            if (hasSW(row,col,letter)) {
+                if (hasS(board[row+1][col-1],board[row+2][col-2])) {
                     points++;
                 }
             }
@@ -199,46 +208,36 @@ public class SosBoard {
         return points;
     }
 
-    private boolean hasNorth(char[][] board,int row, int column, String
-            letter) {
-        return letter.toLowerCase().equals('o')?inBounds(row + 1):inBounds
-                (row+2);
+    private boolean hasNorth(int row, char letter) {
+        return Character.toLowerCase(letter) == 'o'?inBounds(row + 1) :inBounds(row+2);
     }
 
-    private boolean hasSouth(char[][] board,int row, int column, String
-            letter) {
-        return letter.toLowerCase().equals('o')?inBounds(row + 1):inBounds
-                (row+2);
+    private boolean hasSouth(int row, char letter) {
+        return Character.toLowerCase(letter) == 'o'?inBounds(row - 1):inBounds(row-2);
     }
 
-    private boolean hasWest(char[][] board,int row, int column, String
-            letter) {
-        return letter.toLowerCase().equals('o')?inBounds(row + 1):inBounds
-            (row+2);
+    private boolean hasWest(int col, char letter) {
+        return Character.toLowerCase(letter) == 'o'?inBounds(col-1):inBounds(col-2);
     }
 
-    private boolean hasEast(char[][] board,int row, int column, String
-            letter) {
-        return letter.toLowerCase().equals('o')?inBounds(row + 1):inBounds
-                (row+2);
+    private boolean hasEast(int col, char letter) {
+        return Character.toLowerCase(letter) == 'o'?inBounds(col + 1):inBounds(col+2);
     }
 
-    private boolean hasNW(char[][] board,int row, int column, String
-            letter) {
-        return hasNorth(board,row,column,letter) && hasWest(board,row,column,
-                letter);
-    }private boolean hasSW(char[][] board,int row, int column, String
-            letter) {
-        return hasSouth(board,row,column,letter) && hasWest(board,row,column,
-                letter);
-    }private boolean hasNE(char[][] board,int row, int column, String
-            letter) {
-        return hasNorth(board,row,column,letter) && hasEast(board,row,column,
-                letter);
-    }private boolean hasSE(char[][] board,int row, int column, String
-            letter) {
-        return hasSouth(board,row,column,letter) && hasEast(board,row,column,
-                letter);
+    private boolean hasNW(int row, int column, char letter) {
+        return hasNorth(row,letter) && hasWest(column, letter);
+    }private boolean hasSW(int row, int column, char letter) {
+        return hasSouth(row,letter) && hasWest(column, letter);
+    }private boolean hasNE(int row, int column, char letter) {
+        return hasNorth(row,letter) && hasEast(column,letter);
+    }private boolean hasSE(int row, int column, char letter) {
+        return hasSouth(row,letter) && hasEast(column,letter);
+    }
+    private boolean hasO(char letter1, char letter2) {
+        return Character.toLowerCase(letter1) == 's' && Character.toLowerCase(letter2) == 's';
+    }
+    private boolean hasS(char letter1, char letter2) {
+        return Character.toLowerCase(letter1) == 'o' && Character.toLowerCase(letter2) == 's';
     }
 
 /*##########################################################################################
