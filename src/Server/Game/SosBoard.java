@@ -137,12 +137,12 @@ public class SosBoard {
             }
         }
         if (letter == 's') {
-            if (hasNorth(row, letter)) {
+            if (hasSouth(row, letter)) {
                 if (hasS(board[row + 1][col],board[row + 2][col])) {
                     points++;
                 }
             }
-            if (hasSouth(row,letter)) {
+            if (hasNorth(row,letter)) {
                 if (hasS(board[row - 1][col],board[row - 2][col])) {
                     points++;
                 }
@@ -208,11 +208,11 @@ public class SosBoard {
         return points;
     }
 
-    private boolean hasNorth(int row, char letter) {
+    private boolean hasSouth(int row, char letter) {
         return Character.toLowerCase(letter) == 'o'?inBounds(row + 1) :inBounds(row+2);
     }
 
-    private boolean hasSouth(int row, char letter) {
+    private boolean hasNorth(int row, char letter) {
         return Character.toLowerCase(letter) == 'o'?inBounds(row - 1):inBounds(row-2);
     }
 
