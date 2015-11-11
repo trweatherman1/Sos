@@ -33,6 +33,7 @@ public class PlayCommand extends AbstractCommand {
             server.broadcast("Not enough players for a game");
         } else {
             server.setupGame();
+
         }
     }
 }

@@ -12,7 +12,7 @@ import Common.ProgramConstants;
 public class MultiuserSosServerDriver {
     public static void main(String args[]) {
         MultiuserSosServer multiuserSosServer = new MultiuserSosServer
-                (ProgramConstants.DEFAULTPORT);
+                (Integer.parseInt(args[0]),Integer.parseInt(args[1]));
         multiuserSosServer.listen();
     }
 }

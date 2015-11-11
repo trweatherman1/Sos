@@ -84,7 +84,6 @@ public class Game {
      * Determines whos turn it is
      */
     public void changePlayer() {
-        // QUESTION: What in the world is going on here?
         player = (player + 1) % numPlayers;
     }
 
@@ -97,8 +96,6 @@ public class Game {
         //int col = -1;
         String msg = "";
         do {
-
-            //icon = scanIn.next().toUpperCase().charAt(0);
             done = board.setSpot(row, col, icon);
             msg = "Invalid move, try again\n";
         } while (!done);

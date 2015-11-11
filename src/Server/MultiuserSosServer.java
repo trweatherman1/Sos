@@ -52,11 +52,12 @@ public class MultiuserSosServer implements MessageListener {
      *
      * @param port the desired port for the server
      */
-    public MultiuserSosServer(int port) {
+    public MultiuserSosServer(int port, int size) {
         this.potentialPlayers = new ArrayList<>();
         this.connectedPlayers = new HashMap<>();
         this.port = port;
         this.currentGame = new Game();
+        this.size = size;
     }
 
     /**
@@ -212,4 +213,6 @@ public class MultiuserSosServer implements MessageListener {
     public Game getGame(){
         return this.currentGame;
     }
+
+
 }
