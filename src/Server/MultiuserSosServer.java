@@ -207,7 +207,7 @@ public class MultiuserSosServer implements MessageListener {
      * This method sets up the SOS game
      */
     public void setupGame() {
-        currentGame.go(size);
+        broadcast("\n" + currentGame.startGame(size));
     }
 
     public Game getGame(){

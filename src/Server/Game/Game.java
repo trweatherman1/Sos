@@ -46,6 +46,11 @@ public class Game {
         //scanIn = new Scanner(System.in);
     }
 
+    public String startGame(int size) {
+        board = new SosBoard(size);
+        return board.toString();
+    }
+
     /**
      * The method where game play takes place until the board is full.
      */
