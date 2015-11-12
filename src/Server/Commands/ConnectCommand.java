@@ -20,7 +20,7 @@ public class ConnectCommand extends AbstractCommand {
      * @param commandArgs the array of arguments for execution
      */
     public ConnectCommand(String[] commandArgs) {
-        super(commandArgs);
+        super(commandArgs,2);
     }
 
     /**

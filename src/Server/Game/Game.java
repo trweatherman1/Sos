@@ -64,7 +64,7 @@ public class Game {
         int message;
         if(player.equals(players[currentPlayer])) {
             if(board.setSpot(row,col,icon)) {
-                scores[currentPlayer] = board.calculatePoints(row, col);
+                scores[currentPlayer] += board.calculatePoints(row, col);
                 changePlayer();
                 message = board.isFull()?ProgramConstants.FULLBOARD:ProgramConstants.VALIDMOVE;
             } else {
@@ -85,7 +85,6 @@ public class Game {
     public String displayScore() {
         String message = "";
         for (int current = 0; current < numPlayers; current++) {
-            scores[current] = current;
             message += "Player " + players[current] + " has a score of " + scores[current] + "\n";
         }
 
@@ -114,6 +113,10 @@ public class Game {
         String text = "";
         text += board;
         return text;
+    }
+
+    public String getCurrentPlayer() {
+        return players[currentPlayer];
     }
 
 }

@@ -45,7 +45,10 @@ public class MultiuserSosServer implements MessageListener {
     private int port;
 
     /**size of the board*/
-    int size;
+    private int size;
+
+    /** This boolean determines if the game is going on or not */
+    private boolean inGame;
 
     /**
      * This constructor initializes the port for the server to live on
@@ -58,6 +61,7 @@ public class MultiuserSosServer implements MessageListener {
         this.port = port;
         this.currentGame = new Game();
         this.size = size;
+        this.inGame = false;
     }
 
     /**
@@ -142,7 +146,12 @@ public class MultiuserSosServer implements MessageListener {
                 default:
                     command = new InvalidCommand(parsedCommand);
             }
-            command.execute(this, source);
+            if(parsedCommand.length >= command.getNumArgs()) {
+                command.execute(this, source);
+            } else {
+                privateMessage(parsedCommand[0] + "requires " + command.getNumArgs() + "arguments",
+                        source);
+            }
         } else {
             privateMessage("Invalid Command", source);
         }
@@ -191,6 +200,7 @@ public class MultiuserSosServer implements MessageListener {
         for (NetworkInterface player : connectedPlayers.values()) {
             player.sendMessage("Server: " + message);
         }
+        System.out.println("Server: " + message);
     }
 
     /**
@@ -210,6 +220,8 @@ public class MultiuserSosServer implements MessageListener {
         currentGame.startGame(size, connectedPlayers.keySet().toArray(new String[connectedPlayers
                 .size()]));
         displayBoard();
+        displayCurrentPlayer();
+        this.inGame = true;
     }
 
     /**
@@ -232,8 +244,9 @@ public class MultiuserSosServer implements MessageListener {
         } else {
             showScore();
             displayBoard();
+            displayCurrentPlayer();
             if(returnCode == 3) {
-                //END GAME
+                this.inGame = false;
             }
         }
     }
@@ -254,5 +267,13 @@ public class MultiuserSosServer implements MessageListener {
             }
         }
         return playerName;
+    }
+
+    public void displayCurrentPlayer() {
+        broadcast(currentGame.getCurrentPlayer() + "'s turn.");
+    }
+
+    public boolean isInGame() {
+        return inGame;
     }
 }

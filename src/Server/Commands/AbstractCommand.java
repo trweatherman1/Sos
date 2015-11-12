@@ -17,12 +17,22 @@ public abstract class AbstractCommand implements CommandExecutable {
     protected String[] commandArgs;
 
     /**
+     * This is the required size of the commandArgs array
+     */
+    protected int numArgs;
+
+    /**
      * This constructor takes in an array of String arguments which can be
      * variable in size, for all commands
      *
      * @param commandArgs the String commands for execution
      */
-    public AbstractCommand(String[] commandArgs) {
+    public AbstractCommand(String[] commandArgs, int numArgs) {
         this.commandArgs = commandArgs;
+        this.numArgs = numArgs;
+    }
+
+    public int getNumArgs() {
+        return numArgs;
     }
 }

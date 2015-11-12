@@ -18,7 +18,7 @@ public class QuitCommand extends AbstractCommand {
      * @param commandArgs the String commands for execution
      */
     public QuitCommand(String[] commandArgs) {
-        super(commandArgs);
+        super(commandArgs,0);
     }
 
     /**

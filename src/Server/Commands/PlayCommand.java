@@ -18,7 +18,7 @@ public class PlayCommand extends AbstractCommand {
      * @param commandArgs the String commands for execution
      */
     public PlayCommand(String[] commandArgs) {
-        super(commandArgs);
+        super(commandArgs,0);
     }
 
     /**
@@ -31,10 +31,11 @@ public class PlayCommand extends AbstractCommand {
     public void execute(MultiuserSosServer server, MessageSource messageSource) {
         if (server.numConnectedClients() < 2) {
             server.broadcast("Not enough players for a game");
-        } else {
+        }
+        else if(server.isInGame()) {
+            server.broadcast("The game is already running");
+        }else {
             server.setupGame();
-
-
         }
     }
 }
