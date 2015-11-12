@@ -1,6 +1,5 @@
 package Server.Game;
 
-import java.util.Scanner;
 
 /**
  * Models and SOS board
@@ -22,6 +21,11 @@ public class SosBoard {
     private int empty;
 
 
+    /**
+     * Constructor that builds the Sos Board
+     *
+     * @param size the size of the board for the number of rows and number of columns
+     */
     public SosBoard(int size) {
         board = new char[size][size];
         empty = 0;
@@ -29,9 +33,11 @@ public class SosBoard {
     }
 
 
+    /**
+     * A method that checks to see if the position is in the board
+     *
+     */
     private void initBoard() {
-        // WRITE ME
-        Scanner input = new Scanner(System.in);
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board.length; j++) {
                 board[i][j] = ' ';
@@ -208,34 +214,116 @@ public class SosBoard {
         return points;
     }
 
+    /**
+     * A method that checks to see if the user can move south on the board
+     *
+     * @param row
+     * @param letter
+     * @return
+     */
     private boolean hasSouth(int row, char letter) {
         return Character.toLowerCase(letter) == 'o'?inBounds(row + 1) :inBounds(row+2);
     }
 
+    /**
+     * A method that checks to see if the user can move north on the board
+     *
+     * @param row
+     * @param letter
+     * @return
+     */
     private boolean hasNorth(int row, char letter) {
         return Character.toLowerCase(letter) == 'o'?inBounds(row - 1):inBounds(row-2);
     }
 
+    /**
+     * A method that checks to see if the user can move west on the board
+     *
+     * @param col
+     * @param letter
+     * @return
+     */
     private boolean hasWest(int col, char letter) {
         return Character.toLowerCase(letter) == 'o'?inBounds(col-1):inBounds(col-2);
     }
 
+    /**
+     * A method that checks to see if the user can move east on the board
+     *
+     * @param col
+     * @param letter
+     * @return
+     */
     private boolean hasEast(int col, char letter) {
         return Character.toLowerCase(letter) == 'o'?inBounds(col + 1):inBounds(col+2);
     }
 
-    private boolean hasNW(int row, int column, char letter) {
-        return hasNorth(row,letter) && hasWest(column, letter);
-    }private boolean hasSW(int row, int column, char letter) {
-        return hasSouth(row,letter) && hasWest(column, letter);
-    }private boolean hasNE(int row, int column, char letter) {
-        return hasNorth(row,letter) && hasEast(column,letter);
-    }private boolean hasSE(int row, int column, char letter) {
-        return hasSouth(row,letter) && hasEast(column,letter);
+    /**
+     * A method that checks to see if the user can move northwest on the board
+     *
+     * @param row
+     * @param col
+     * @param letter
+     * @return
+     */
+    private boolean hasNW(int row, int col, char letter) {
+        return hasNorth(row,letter) && hasWest(col, letter);
     }
+
+    /**
+     * A method that checks to see if the user can move southwest on the board
+     *
+     * @param row
+     * @param col
+     * @param letter
+     * @return
+     */
+    private boolean hasSW(int row, int col, char letter) {
+        return hasSouth(row,letter) && hasWest(col, letter);
+    }
+
+    /**
+     * A method that checks to see if the user can move northeast on the board
+     *
+     * @param row
+     * @param col
+     * @param letter
+     * @return
+     */
+    private boolean hasNE(int row, int col, char letter) {
+        return hasNorth(row,letter) && hasEast(col,letter);
+    }
+
+    /**
+     * A method that checks to see if the user can move southeast on the board
+     *
+     * @param row
+     * @param col
+     * @param letter
+     * @return
+     */
+    private boolean hasSE(int row, int col, char letter) {
+        return hasSouth(row,letter) && hasEast(col,letter);
+    }
+
+    /**
+     * A method that checks if the current letter is 'o' by checking letter1 and letter2
+     *
+     * @param letter1
+     * @param letter2
+     * @return
+     */
     private boolean hasO(char letter1, char letter2) {
         return Character.toLowerCase(letter1) == 's' && Character.toLowerCase(letter2) == 's';
     }
+
+    /**
+     * A method that checks if the current letter is 's' or 'o' by checking letter1 and letter2
+     *
+     * @param letter1
+     * @param letter2
+     * @return
+     */
     private boolean hasS(char letter1, char letter2) {
         return Character.toLowerCase(letter1) == 'o' && Character.toLowerCase(letter2) == 's';
     }
@@ -244,6 +332,10 @@ public class SosBoard {
   # Do not modify under this divider                                                       #
   ##########################################################################################*/
 
+    /**
+     * A method that will print out a string for the boarder around the rows and columns
+     * @return
+     */
     public String toString() {
         StringBuilder result = new StringBuilder(getEdge());
         result.append(getDivider());

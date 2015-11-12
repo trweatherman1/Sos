@@ -212,6 +212,16 @@ public class MultiuserSosServer implements MessageListener {
         displayBoard();
     }
 
+    /**
+     * A method that calls the move method from the Game class, this will check if the position if the user wants to
+     * place an icon at is invalid, valid or if it's not the user's turn.
+     * Displays the score and the board
+     *
+     * @param row
+     * @param col
+     * @param icon
+     * @param player
+     */
     public void move(int row, int col, char icon, String player) {
         int returnCode = currentGame.move(row, col, icon, player);
         if (returnCode == 1) {

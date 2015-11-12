@@ -48,6 +48,18 @@ public class Game {
         this.scores = new int[numPlayers];
     }
 
+    /**
+     *
+     * A method that will determine the movement of the player.
+     * This will calculate the position on the board, the icon the user wants to use
+     * and calulate the points the user will be getting (if any).
+     *
+     * @param row
+     * @param col
+     * @param icon
+     * @param player
+     * @return
+     */
     public int move(int row, int col, char icon,String player) {
         int message;
         if(player.equals(players[currentPlayer])) {
@@ -65,7 +77,10 @@ public class Game {
     }
 
     /**
-     * Print the current score of all players to standard out.
+     * Print the current score of all players out.
+     * When the board is full it will print the high score of the players and determine a winner.
+     *
+     * @return return the player and the score of the player
      */
     public String displayScore() {
         String message = "";
@@ -74,10 +89,12 @@ public class Game {
             message += "Player " + players[current] + " has a score of " + scores[current] + "\n";
         }
 
-        int highScore = 0;
-        for (int i = 1; i < numPlayers; i++) {
-            if (scores[i] > scores[highScore])
-                highScore = i;
+        if(board.isFull()) {
+            int highScore = 0;
+            for (int i = 1; i < numPlayers; i++) {
+                if (scores[i] > scores[highScore])
+                    highScore = i;
+            }
         }
         return message;
     }
