@@ -214,5 +214,7 @@ public class MultiuserSosServer implements MessageListener {
         return this.currentGame;
     }
 
-
+    public void move(int row, int col, char icon, String player) {
+        currentGame.move(row, col, icon, player);
+    }
 }

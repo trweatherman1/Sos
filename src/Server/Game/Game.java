@@ -46,9 +46,20 @@ public class Game {
         //scanIn = new Scanner(System.in);
     }
 
+    /**
+     * This method creates a new SOS board of the specified size and then prints the board to the
+     * screen
+     *
+     * @param size size of one side of the board
+     * @return the String representation of the board
+     */
     public String startGame(int size) {
         board = new SosBoard(size);
         return board.toString();
+    }
+
+    public boolean move(int row, int col, char icon,String player) {
+        return board.setSpot(row,col,icon);
     }
 
     /**
