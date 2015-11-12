@@ -62,6 +62,9 @@ public class Game {
         return board.setSpot(row,col,icon);
     }
 
+
+
+
     /**
      * The method where game play takes place until the board is full.
      */
@@ -92,7 +95,14 @@ public class Game {
      */
     public void displayScore() {
         for (int current = 0; current < numPlayers; current++) {
-            System.out.println("Player " + current + " has a score of " + scores[current]);
+            scores[current] = current;
+            //System.out.println("Player " + current + " has a score of " + scores[current]);
+        }
+
+        int highScore = 0;
+        for (int i = 1; i < numPlayers; i++) {
+            if (scores[i] > scores[highScore])
+                highScore = i;
         }
     }
 
