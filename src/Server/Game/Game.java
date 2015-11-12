@@ -54,7 +54,7 @@ public class Game {
         do {
             board = new SosBoard(size);
             toString();
-            makeMove();
+            //makeMove();
             changePlayer();
             displayScore();
         } while (!board.isFull());

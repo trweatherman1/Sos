@@ -209,7 +209,7 @@ public class MultiuserSosServer implements MessageListener {
         currentGame.go(size);
     }
 
-    public void getGame(){
-        currentGame.makeMove();
+    public Game getGame(){
+        return this.currentGame;
     }
 }
