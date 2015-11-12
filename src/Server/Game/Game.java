@@ -45,14 +45,16 @@ public class Game {
         this.numPlayers = players.length;
         this.players = players;
         board = new SosBoard(size);
+        this.scores = new int[numPlayers];
     }
 
     public int move(int row, int col, char icon,String player) {
         int message;
         if(player.equals(players[currentPlayer])) {
             if(board.setSpot(row,col,icon)) {
-                message = ProgramConstants.VALIDMOVE;
+                scores[currentPlayer] = board.calculatePoints(row, col);
                 changePlayer();
+                message = board.isFull()?ProgramConstants.FULLBOARD:ProgramConstants.VALIDMOVE;
             } else {
                 message = ProgramConstants.INVALIDMOVE;
             }
@@ -69,7 +71,7 @@ public class Game {
         String message = "";
         for (int current = 0; current < numPlayers; current++) {
             scores[current] = current;
-           message += "Player " + current + " has a score of " + scores[current] + "\n";
+            message += "Player " + players[current] + " has a score of " + scores[current] + "\n";
         }
 
         int highScore = 0;
@@ -81,7 +83,7 @@ public class Game {
     }
 
     /**
-     * Determines whos turn it is
+     * Determines which player's turn it is
      */
     public void changePlayer() {
         currentPlayer = (currentPlayer + 1) % numPlayers;

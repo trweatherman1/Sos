@@ -222,6 +222,9 @@ public class MultiuserSosServer implements MessageListener {
         } else {
             showScore();
             displayBoard();
+            if(returnCode == 3) {
+                //END GAME
+            }
         }
     }
 

@@ -26,4 +26,7 @@ public class ProgramConstants {
 
     /** Return code for valid move */
     public static int VALIDMOVE = 0;
+
+    /** Return code for full board */
+    public static int FULLBOARD = 3;
 }
