@@ -101,6 +101,7 @@ public class SosBoard {
      * @return
      */
     public int calculatePoints(int row, int col) {
+
         return checkCompass(row, col) + checkDiag(row, col);
     }
 
