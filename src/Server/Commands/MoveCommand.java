@@ -32,6 +32,8 @@ public class MoveCommand extends AbstractCommand {
     @Override
     public void execute(MultiuserSosServer server, MessageSource messageSource)
     {
-        //server.move(commandArgs[0],commandArgs[1],commandArgs[2],messageSource);
+        server.move(Integer.parseInt(commandArgs[2]),Integer.parseInt(commandArgs[3]),
+                commandArgs[1].charAt(0),server
+                .getPlayerName(messageSource));
     }
 }

@@ -207,22 +207,39 @@ public class MultiuserSosServer implements MessageListener {
      * This method sets up the SOS game
      */
     public void setupGame() {
-        broadcast("\n" + currentGame.startGame(size));
-    }
-
-    public Game getGame(){
-        return this.currentGame;
+        currentGame.startGame(size, connectedPlayers.keySet().toArray(new String[connectedPlayers
+                .size()]));
+        displayBoard();
     }
 
     public void move(int row, int col, char icon, String player) {
-        currentGame.move(row, col, icon, player);
+        int returnCode = currentGame.move(row, col, icon, player);
+        if (returnCode == 1) {
+            broadcast("Invalid Move");
+        }
+        else if(returnCode == 2) {
+            privateMessage("Not your turn",connectedPlayers.get(player));
+        } else {
+            showScore();
+            displayBoard();
+        }
     }
 
-    public void score(){
-        currentGame.displayScore();
+    public void showScore() {
+        broadcast("\n" + currentGame.displayScore());
     }
 
-    public void players(){
-        currentGame.changePlayer();
+    public void displayBoard() {
+        broadcast("\n" + currentGame.toString());
+    }
+
+    public String getPlayerName(MessageSource messageSource) {
+        String playerName = "Player Not Found";
+        for(String name : connectedPlayers.keySet().toArray(new String[connectedPlayers.size()])) {
+            if(connectedPlayers.get(name).equals(messageSource)) {
+                playerName = name;
+            }
+        }
+        return playerName;
     }
 }

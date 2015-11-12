@@ -17,4 +17,13 @@ public class ProgramConstants {
      * This is the default size
      */
     public static int DEFAULTSIZE = 3;
+
+    /** Return code for invalid move */
+    public static int INVALIDMOVE = 1;
+
+    /** Return code for player out of turn*/
+    public static int WRONGPLAYER = 2;
+
+    /** Return code for valid move */
+    public static int VALIDMOVE = 0;
 }

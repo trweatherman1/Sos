@@ -1,8 +1,6 @@
 package Server.Game;
 
-import Common.MessageListener;
-
-import java.util.Scanner;
+import Common.ProgramConstants;
 
 /**
  * Models a game of SOS
@@ -14,7 +12,7 @@ import java.util.Scanner;
 
 public class Game {
     /** Current player. From 0 to n*/
-    private int player;
+    private int currentPlayer;
 
     /**Hold the scores of all the players */
     private int[] scores;
@@ -22,28 +20,18 @@ public class Game {
     /** The sos board*/
     private SosBoard board;
 
-    /** For input from the user*/
-    private Scanner scanIn;
-
     /** Current allowed number of player */
     private int numPlayers;
+
+    /** The String array that the players usernames are stored in*/
+    private String[] players;
 
     /**
      * Initialize everything for a new game of SOS. Player 0 always goes first.
      */
     public Game() {
-        player = 0;
-        scanIn = new Scanner(System.in);
-
-
-        //System.out.println("Enter the number of players");
-        //numPlayers = scanIn.nextInt();
+        this.currentPlayer = 0;
         scores = new int[numPlayers];
-        //System.out.println("Enter the size of the board");
-        //int size = scanIn.nextInt();
-
-        //board = new SosBoard(size);
-        //scanIn = new Scanner(System.in);
     }
 
     /**
@@ -53,50 +41,35 @@ public class Game {
      * @param size size of one side of the board
      * @return the String representation of the board
      */
-    public String startGame(int size) {
+    public void startGame(int size, String[] players) {
+        this.numPlayers = players.length;
+        this.players = players;
         board = new SosBoard(size);
-        return board.toString();
     }
 
-    public boolean move(int row, int col, char icon,String player) {
-        return board.setSpot(row,col,icon);
-    }
-
-
-
-
-    /**
-     * The method where game play takes place until the board is full.
-     */
-    public void go(int size) {
-
-        do {
-            board = new SosBoard(size);
-            toString();
-            //makeMove();
-            changePlayer();
-            displayScore();
-        } while (!board.isFull());
-
-
-        int highScore = 0;
-        for (int i = 1; i < numPlayers; i++) {
-            if (scores[i] > scores[highScore])
-                highScore = i;
+    public int move(int row, int col, char icon,String player) {
+        int message;
+        if(player.equals(players[currentPlayer])) {
+            if(board.setSpot(row,col,icon)) {
+                message = ProgramConstants.VALIDMOVE;
+                changePlayer();
+            } else {
+                message = ProgramConstants.INVALIDMOVE;
+            }
+        } else {
+            message = ProgramConstants.WRONGPLAYER;
         }
-
-        System.out.println("The winner is: Player " + highScore);
+        return message;
     }
-
-
 
     /**
      * Print the current score of all players to standard out.
      */
-    public void displayScore() {
+    public String displayScore() {
+        String message = "";
         for (int current = 0; current < numPlayers; current++) {
             scores[current] = current;
-            //System.out.println("Player " + current + " has a score of " + scores[current]);
+           message += "Player " + current + " has a score of " + scores[current] + "\n";
         }
 
         int highScore = 0;
@@ -104,30 +77,14 @@ public class Game {
             if (scores[i] > scores[highScore])
                 highScore = i;
         }
+        return message;
     }
 
     /**
      * Determines whos turn it is
      */
     public void changePlayer() {
-        player = (player + 1) % numPlayers;
-    }
-
-    /**
-     * Allow a player to make a valid move.
-     */
-    public void makeMove(int row, int col, char icon) {
-        boolean done = false;
-        //int row = -1;
-        //int col = -1;
-        String msg = "";
-        do {
-            done = board.setSpot(row, col, icon);
-            msg = "Invalid move, try again\n";
-        } while (!done);
-
-        // If we get here the player made a valid move and we see if the got any points. 
-        scores[player] += board.calculatePoints(row, col);
+        currentPlayer = (currentPlayer + 1) % numPlayers;
     }
 
     /**
@@ -139,17 +96,5 @@ public class Game {
         text += board;
         return text;
     }
-
-    /**
-     * Entry point into this program.
-     *
-     * @param args Not used.
-
-    public static void main(String[] args) {
-        Game driver = new Game();
-        size = Integer.parseInt(args[1]);
-        driver.go(size);
-    }
-    */
 
 }
