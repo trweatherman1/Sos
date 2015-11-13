@@ -49,10 +49,10 @@ public class SosBoard {
     /**
      * A method that sets the spot of the game board with either an S or an O
      *
-     * @param row
-     * @param col
-     * @param icon
-     * @return
+     * @param row the horizontal spaces on the board
+     * @param col the vertical spaces on the board
+     * @param icon the character that will take up the space on the board
+     * @return false if a result has nothing in it, else return true if there is result has something in it
      */
     public boolean setSpot(int row, int col, char icon) {
         boolean result = false;
@@ -72,10 +72,9 @@ public class SosBoard {
     /**
      * A boolean method that checks to see if the board is full
      *
-     * @return
+     * @return false if count is greater than 0 and true if count is otherwise
      */
     public boolean isFull() {
-
         int count = 0;
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board.length; j++) {
@@ -83,9 +82,7 @@ public class SosBoard {
                     count++;
                 }
             }
-
         }
-
         if (count > 0) {
             return false;
         } else {
@@ -96,9 +93,10 @@ public class SosBoard {
     /**
      * A method that calculates the number of points given if a player makes sos
      *
-     * @param row
-     * @param col
-     * @return
+     * @param row the horizontal spaces on the board
+     * @param col the vertical spaces on the board
+     * @return the methods checkCompass(row, col) and checkDiag(row, col) to calculate points vertically, horizontally
+     * and diagonally
      */
     public int calculatePoints(int row, int col) {
 
@@ -109,8 +107,8 @@ public class SosBoard {
     /**
      * A boolean method that makes sure that the game is played in bounds of the board
      *
-     * @param num
-     * @return
+     * @param num for the number of spaces on the board
+     * @return true if the number is greater than 0 and less than the length of the board or else it's false
      */
     public boolean inBounds(int num) {
         if (num >= 0 && num < board.length) {
@@ -124,9 +122,9 @@ public class SosBoard {
     /**
      * A method that checks vertically and horizontally if the board spells sos
      *
-     * @param row
-     * @param col
-     * @return
+     * @param row the horizontal spaces on the board
+     * @param col the vertical spaces on the board
+     * @return the points that have been gained by making SOS on the board vertically or horizontally
      */
     public int checkCompass(int row, int col) {
         int points = 0;
@@ -172,9 +170,9 @@ public class SosBoard {
     /**
      * A method that checks diagonally if the board spells sos
      *
-     * @param row
-     * @param col
-     * @return
+     * @param row the horizontal spaces on the board
+     * @param col the vertical spaces on the board
+     * @return the points that have been gained by making SOS on the board diagonally
      */
     public int checkDiag(int row, int col) {
         int points = 0;
@@ -218,9 +216,9 @@ public class SosBoard {
     /**
      * A method that checks to see if the user can move south on the board
      *
-     * @param row
-     * @param letter
-     * @return
+     * @param row the horizontal spaces on the game board
+     * @param letter the letter that will be entered in a space on the board
+     * @return the letter if it's in bound by 1 or else if it's in bound by 2
      */
     private boolean hasSouth(int row, char letter) {
         return Character.toLowerCase(letter) == 'o'?inBounds(row + 1) :inBounds(row+2);
@@ -229,9 +227,9 @@ public class SosBoard {
     /**
      * A method that checks to see if the user can move north on the board
      *
-     * @param row
-     * @param letter
-     * @return
+     * @param row the horizontal spaces on the game board
+     * @param letter the letter that will be entered in a space on the board
+     * @return the letter if it's in bound by 1 or else if it's in bound by 2
      */
     private boolean hasNorth(int row, char letter) {
         return Character.toLowerCase(letter) == 'o'?inBounds(row - 1):inBounds(row-2);
@@ -240,9 +238,9 @@ public class SosBoard {
     /**
      * A method that checks to see if the user can move west on the board
      *
-     * @param col
-     * @param letter
-     * @return
+     * @param col the vertical spaces on the game board
+     * @param letter the letter that will be entered in a space on the board
+     * @return the letter if it's in bound by 1 or else if it's in bound by 2
      */
     private boolean hasWest(int col, char letter) {
         return Character.toLowerCase(letter) == 'o'?inBounds(col-1):inBounds(col-2);
@@ -251,9 +249,9 @@ public class SosBoard {
     /**
      * A method that checks to see if the user can move east on the board
      *
-     * @param col
-     * @param letter
-     * @return
+     * @param col the vertical spaces on the game board
+     * @param letter the letter that will be entered in a space on the board
+     * @return the letter if it's in bound by 1 or else if it's in bound by 2
      */
     private boolean hasEast(int col, char letter) {
         return Character.toLowerCase(letter) == 'o'?inBounds(col + 1):inBounds(col+2);
@@ -262,10 +260,10 @@ public class SosBoard {
     /**
      * A method that checks to see if the user can move northwest on the board
      *
-     * @param row
-     * @param col
-     * @param letter
-     * @return
+     * @param row the horizontal spaces on the game board
+     * @param col the vertical spaces on the game board
+     * @param letter the letter that will be entered in a space on the board
+     * @return the hasNorth method and the hasWest method to combine directions for the diagonals
      */
     private boolean hasNW(int row, int col, char letter) {
         return hasNorth(row,letter) && hasWest(col, letter);
@@ -274,10 +272,10 @@ public class SosBoard {
     /**
      * A method that checks to see if the user can move southwest on the board
      *
-     * @param row
-     * @param col
-     * @param letter
-     * @return
+     * @param row the horizontal spaces on the game board
+     * @param col the vertical spaces on the game board
+     * @param letter the letter that will be entered in a space on the board
+     * @return the hasSouth method and the hasWest method to combine directions for the diagonals
      */
     private boolean hasSW(int row, int col, char letter) {
         return hasSouth(row,letter) && hasWest(col, letter);
@@ -286,10 +284,10 @@ public class SosBoard {
     /**
      * A method that checks to see if the user can move northeast on the board
      *
-     * @param row
-     * @param col
-     * @param letter
-     * @return
+     * @param row the horizontal spaces on the game board
+     * @param col the vertical spaces on the game board
+     * @param letter the letter that will be entered in a space on the board
+     * @return the hasNorth method and the hasEast method to combine directions for the diagonals
      */
     private boolean hasNE(int row, int col, char letter) {
         return hasNorth(row,letter) && hasEast(col,letter);
@@ -298,10 +296,10 @@ public class SosBoard {
     /**
      * A method that checks to see if the user can move southeast on the board
      *
-     * @param row
-     * @param col
-     * @param letter
-     * @return
+     * @param row the horizontal spaces on the game board
+     * @param col the vertical spaces on the game board
+     * @param letter the letter that will be entered in a space on the board
+     * @return the hasSouth method and the hasEast method to combine directions for the diagonals
      */
     private boolean hasSE(int row, int col, char letter) {
         return hasSouth(row,letter) && hasEast(col,letter);
@@ -321,9 +319,9 @@ public class SosBoard {
     /**
      * A method that checks if the current letter is 's' or 'o' by checking letter1 and letter2
      *
-     * @param letter1
-     * @param letter2
-     * @return
+     * @param letter1 is the first letter to check for if there is a neighbor
+     * @param letter2 is the second letter to check for it there is neighbor
+     * @return return the letters that have been made into lower case
      */
     private boolean hasS(char letter1, char letter2) {
         return Character.toLowerCase(letter1) == 'o' && Character.toLowerCase(letter2) == 's';
@@ -335,7 +333,7 @@ public class SosBoard {
 
     /**
      * A method that will print out a string for the boarder around the rows and columns
-     * @return
+     * @return StringBuilder result that will display the outline of the board
      */
     public String toString() {
         StringBuilder result = new StringBuilder(getEdge());
