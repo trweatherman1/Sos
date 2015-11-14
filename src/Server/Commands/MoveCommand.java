@@ -33,9 +33,13 @@ public class MoveCommand extends AbstractCommand {
     public void execute(MultiuserSosServer server, MessageSource messageSource)
     {
         if(server.isInGame()) {
-            server.move(Integer.parseInt(commandArgs[2]), Integer.parseInt(commandArgs[3]),
-                    commandArgs[1].charAt(0), server
-                            .getPlayerName(messageSource));
+            try {
+                server.move(Integer.parseInt(commandArgs[2]), Integer.parseInt(commandArgs[3]),
+                        commandArgs[1].charAt(0), server
+                                .getPlayerName(messageSource));
+            } catch (NumberFormatException e) {
+                server.broadcast("Usage: /move <char> <row> <col>");
+            }
         } else {
             server.broadcast("Game is not running");
         }
