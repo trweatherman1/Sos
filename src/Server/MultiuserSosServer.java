@@ -244,9 +244,11 @@ public class MultiuserSosServer implements MessageListener {
         } else {
             showScore();
             displayBoard();
-            displayCurrentPlayer();
             if(returnCode == 3) {
                 this.inGame = false;
+                broadcast("GAME OVER");
+            } else {
+                displayCurrentPlayer();
             }
         }
     }
