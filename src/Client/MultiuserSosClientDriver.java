@@ -22,11 +22,11 @@ public class MultiuserSosClientDriver {
                             ProgramConstants.DEFAULTPORT);
             multiuserSosClient.playGame();
             Scanner scanner = new Scanner(System.in);
-            String command;
-            do {
+            String command = "";
+            while (!command.toLowerCase().contains("quit") && multiuserSosClient.isActive()) {
                 command = scanner.nextLine();
                 multiuserSosClient.sendMessage(command);
-            } while (!command.toLowerCase().contains("quit") || multiuserSosClient.isActive());
+            }
         }
 
     }
