@@ -34,6 +34,9 @@ public class MultiuserSosClient extends MessageSource implements
      */
     private NetworkInterface networkInterface;
 
+    /** This is the boolean for if the client is still connected */
+    private boolean active;
+
     /**
      * This is the default constructor with a specified IP address
      *
@@ -53,6 +56,7 @@ public class MultiuserSosClient extends MessageSource implements
     public MultiuserSosClient(String ip, int port) {
         this.ip = ip;
         this.port = port;
+        this.active = true;
     }
 
     /**
@@ -101,8 +105,19 @@ public class MultiuserSosClient extends MessageSource implements
             networkInterface.addMessageListener(this);
             Thread clientThread = new Thread(this.networkInterface);
             clientThread.start();
+            this.active = true;
         } catch (IOException e) {
-            e.printStackTrace();
+            this.active = false;
         }
+    }
+
+    /**
+     * This method returns the boolean active that is true while the client is connected to the
+     * server
+     *
+     * @return the boolean value for active
+     */
+    public boolean isActive() {
+        return active;
     }
 }

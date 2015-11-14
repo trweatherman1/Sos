@@ -26,7 +26,7 @@ public class MultiuserSosClientDriver {
             do {
                 command = scanner.nextLine();
                 multiuserSosClient.sendMessage(command);
-            } while (!command.toLowerCase().contains("quit"));
+            } while (!command.toLowerCase().contains("quit") || multiuserSosClient.isActive());
         }
 
     }
