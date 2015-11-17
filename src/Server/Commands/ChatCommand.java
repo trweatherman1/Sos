@@ -16,7 +16,6 @@ public class ChatCommand extends AbstractCommand implements CommandExecutable{
      * variable in size, for all commands
      *
      * @param commandArgs the String commands for execution
-     * @param numArgs
      */
     public ChatCommand(String[] commandArgs) {
         super(commandArgs, 2);
