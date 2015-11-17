@@ -31,6 +31,7 @@ public class QuitCommand extends AbstractCommand {
      */
     @Override
     public void execute(MultiuserSosServer server, MessageSource messageSource) {
+        server.privateMessage("Goodbye", messageSource);
         server.sourceClosed(messageSource);
     }
 }
