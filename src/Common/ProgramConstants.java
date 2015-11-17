@@ -30,13 +30,19 @@ public class ProgramConstants {
     /** Return code for full board */
     public static int FULLBOARD = 3;
 
-    /** The number of arguments for a 4 tuple command */
+    /**
+     * The number of arguments for a 4 tuple command
+     */
     public static int FOURTUPLE = 4;
 
-    /** The number of arguments for a 0 tuple command */
+    /**
+     * The number of arguments for a 0 tuple command
+     */
     public static int NOARGS = 4;
 
-    /** The number of arguments for a 2 tuple command */
+    /**
+     * The number of arguments for a 2 tuple command
+     */
     public static int TWOTUPLE = 4;
 
 
