@@ -75,16 +75,13 @@ public class NetworkInterface extends MessageSource implements Runnable {
             send.write((message + "\n").getBytes());
             send.flush();
         } catch (IOException e) {
-            System.out.println("IOException: " + e.getMessage());
             connected = false;
+            closeMessageSource();
         }
     }
 
     public void setConnected(boolean isConnected) {
         this.connected = isConnected;
-        if(!connected) {
-            closeMessageSource();
-        }
     }
 
 }
