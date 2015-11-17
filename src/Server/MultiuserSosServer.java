@@ -261,6 +261,10 @@ public class MultiuserSosServer implements MessageListener {
         broadcast("\n" + currentGame.displayScore());
     }
 
+    public void showHighScore(){
+        broadcast("\n" + currentGame.highScore());
+    }
+
     public void displayBoard() {
         broadcast("\n" + currentGame.toString());
     }
@@ -288,6 +292,8 @@ public class MultiuserSosServer implements MessageListener {
             this.inGame = false;
             broadcast("\n-----------Game Over---------------");
             showScore();
+            showHighScore();
+
         }
     }
 

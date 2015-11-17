@@ -87,11 +87,17 @@ public class Game {
             message += "Player " + players[current] + " has a score of " + scores[current] + "\n";
         }
 
+        return message;
+    }
+
+    public String highScore(){
+        String message = "";
         if(board.isFull()) {
             int highScore = 0;
             for (int i = 1; i < numPlayers; i++) {
                 if (scores[i] > scores[highScore])
                     highScore = i;
+                    message = "Player " + players[i] + " wins with " + scores[highScore] + " points";
             }
         }
         return message;
