@@ -118,6 +118,9 @@ public class MultiuserSosServer implements MessageListener {
     public void sourceClosed(MessageSource source) {
         source.removeMessageListener(this);
         this.connectedPlayers.remove(source);
+        this.potentialPlayers.remove(source);
+        this.inGame = false;
+        broadcast(getPlayerName(source) + " has disconnected");
     }
 
     /**
