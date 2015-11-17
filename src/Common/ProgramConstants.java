@@ -38,12 +38,12 @@ public class ProgramConstants {
     /**
      * The number of arguments for a 0 tuple command
      */
-    public static int NOARGS = 4;
+    public static int NOARGS = 0;
 
     /**
      * The number of arguments for a 2 tuple command
      */
-    public static int TWOTUPLE = 4;
+    public static int TWOTUPLE = 2;
 
 
 }
