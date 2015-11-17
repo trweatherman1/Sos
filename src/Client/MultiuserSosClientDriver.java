@@ -27,6 +27,7 @@ public class MultiuserSosClientDriver {
                 command = scanner.nextLine();
                 multiuserSosClient.sendMessage(command);
             }
+            multiuserSosClient.cleanUp();
         }
 
     }

@@ -120,4 +120,9 @@ public class MultiuserSosClient extends MessageSource implements
     public boolean isActive() {
         return active;
     }
+
+    public void cleanUp() {
+        sendMessage("/quit");
+        networkInterface.setConnected(false);
+    }
 }

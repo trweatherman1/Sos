@@ -23,6 +23,11 @@ public class NetworkInterface extends MessageSource implements Runnable {
     private BufferedReader receive;
 
     /**
+     * This is a boolean for the Network Interface being connected
+     */
+    private boolean connected;
+
+    /**
      * A constructor for the NetworkInterface Class takes in parameters send and receive
      *
      * @param send an output stream that will be sent from the client
@@ -48,7 +53,7 @@ public class NetworkInterface extends MessageSource implements Runnable {
     public void run() {
         String message;
         try {
-            while ((message = this.receive.readLine()) != null) {
+            while ((message = this.receive.readLine()) != null && connected) {
                 notifyReceipt(message);
             }
         } catch (IOException e) {
@@ -70,6 +75,10 @@ public class NetworkInterface extends MessageSource implements Runnable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void setConnected(boolean isConnected) {
+        this.connected = isConnected;
     }
 
 }

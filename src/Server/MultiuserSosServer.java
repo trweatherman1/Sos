@@ -116,7 +116,9 @@ public class MultiuserSosServer implements MessageListener {
      */
     @Override
     public void sourceClosed(MessageSource source) {
-        source.removeMessageListener(this);
+        if(source instanceof NetworkInterface) {
+            ((NetworkInterface) source).setConnected(false);
+        }
         this.connectedPlayers.remove(source);
         this.potentialPlayers.remove(source);
         endGame();
