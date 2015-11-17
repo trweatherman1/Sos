@@ -15,10 +15,6 @@ public class SosBoard {
      * A 2d array that will be the game board
      */
     private char board[][];
-    /**
-     * an integer value that will be empty
-     */
-    private int empty;
 
 
     /**
@@ -28,7 +24,6 @@ public class SosBoard {
      */
     public SosBoard(int size) {
         board = new char[size][size];
-        empty = 0;
         initBoard();
     }
 
@@ -61,7 +56,6 @@ public class SosBoard {
             if (board[row][col] == ' ') {
                 board[row][col] = icon;
                 result = true;
-                empty++;
             }
         }
         return result;
@@ -82,11 +76,7 @@ public class SosBoard {
                 }
             }
         }
-        if (count > 0) {
-            return false;
-        } else {
-            return true;
-        }
+        return !(count > 0);
     }
 
     /**
@@ -110,11 +100,7 @@ public class SosBoard {
      * @return true if the number is greater than 0 and less than the length of the board or else it's false
      */
     public boolean inBounds(int num) {
-        if (num >= 0 && num < board.length) {
-            return true;
-        } else {
-            return false;
-        }
+        return (num >= 0 && num < board.length);
     }
 
 
@@ -332,9 +318,9 @@ public class SosBoard {
     /**
      * A method that checks if the current letter is 'o' by checking letter1 and letter2
      *
-     * @param letter1
-     * @param letter2
-     * @return
+     * @param letter1 the letter to the left of the o
+     * @param letter2 the letter to the right of the o
+     * @return if both letters are s so an SOS is formed
      */
     private boolean hasO(char letter1, char letter2) {
         return Character.toLowerCase(letter1) == 's' && Character.toLowerCase(letter2) == 's';

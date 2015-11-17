@@ -39,7 +39,6 @@ public class Game {
      * screen
      *
      * @param size size of one side of the board
-     * @return the String representation of the board
      */
     public void startGame(int size, String[] players) {
         this.numPlayers = players.length;
@@ -54,11 +53,11 @@ public class Game {
      * This will calculate the position on the board, the icon the user wants to use
      * and calulate the points the user will be getting (if any).
      *
-     * @param row
-     * @param col
-     * @param icon
-     * @param player
-     * @return
+     * @param row the row that the move is to
+     * @param col the column that the move is on
+     * @param icon the character used
+     * @param player the player that made the move
+     * @return the number of points received for the turn
      */
     public int move(int row, int col, char icon,String player) {
         int message;
