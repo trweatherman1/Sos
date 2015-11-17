@@ -36,6 +36,7 @@ public class NetworkInterface extends MessageSource implements Runnable {
     public NetworkInterface(OutputStream send, InputStream receive) {
         this.send = send;
         this.receive = new BufferedReader(new InputStreamReader(receive));
+        connected = true;
     }
 
     /**

@@ -26,8 +26,7 @@ public class MultiuserSosClientDriver {
             if(args.length > 2) {
                 multiuserSosClient.sendMessage("/connect " + args[2]);
             }
-            while (multiuserSosClient.isActive() && !command.toLowerCase()
-                    .contains("quit")) {
+            while (multiuserSosClient.isActive() && !command.toLowerCase().contains("quit")) {
                 command = scanner.nextLine();
                 multiuserSosClient.sendMessage(command);
             }
