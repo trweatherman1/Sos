@@ -284,9 +284,11 @@ public class MultiuserSosServer implements MessageListener {
     }
 
     public void endGame() {
-        this.inGame = false;
-        broadcast("\n-----------Game Over---------------");
-        showScore();
+        if(inGame) {
+            this.inGame = false;
+            broadcast("\n-----------Game Over---------------");
+            showScore();
+        }
     }
 
     public void chat(String message, MessageSource source, String receiver) {
