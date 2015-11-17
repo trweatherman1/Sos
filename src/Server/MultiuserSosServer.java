@@ -119,8 +119,7 @@ public class MultiuserSosServer implements MessageListener {
         source.removeMessageListener(this);
         this.connectedPlayers.remove(source);
         this.potentialPlayers.remove(source);
-        this.inGame = false;
-        broadcast(getPlayerName(source) + " has disconnected");
+        endGame();
     }
 
     /**
@@ -248,8 +247,7 @@ public class MultiuserSosServer implements MessageListener {
             showScore();
             displayBoard();
             if(returnCode == 3) {
-                this.inGame = false;
-                broadcast("GAME OVER");
+                endGame();
             } else {
                 displayCurrentPlayer();
             }
@@ -280,5 +278,11 @@ public class MultiuserSosServer implements MessageListener {
 
     public boolean isInGame() {
         return inGame;
+    }
+
+    public void endGame() {
+        this.inGame = false;
+        broadcast("\n-----------Game Over---------------");
+        showScore();
     }
 }
