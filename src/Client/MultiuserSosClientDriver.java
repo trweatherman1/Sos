@@ -1,7 +1,5 @@
 package Client;
 
-import Common.ProgramConstants;
-
 import java.util.Scanner;
 
 /**
@@ -18,8 +16,7 @@ public class MultiuserSosClientDriver {
                     "<host ip> <port> <nickname>");
         } else {
             MultiuserSosClient multiuserSosClient = new MultiuserSosClient
-                    (args[0], args.length == 2 ? Integer.parseInt(args[1]) :
-                            ProgramConstants.DEFAULTPORT);
+                    (args[0], Integer.parseInt(args[1]));
             multiuserSosClient.playGame();
             if (multiuserSosClient.isActive()) {
                 Scanner scanner = new Scanner(System.in);
