@@ -53,7 +53,7 @@ public class NetworkInterface extends MessageSource implements Runnable {
     public void run() {
         String message;
         try {
-            while ((message = this.receive.readLine()) != null && connected) {
+            while (connected && (message = this.receive.readLine()) != null) {
                 notifyReceipt(message);
             }
         } catch (IOException e) {
