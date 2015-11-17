@@ -1,6 +1,7 @@
 package Server.Commands;
 
 import Common.MessageSource;
+import Common.ProgramConstants;
 import Server.MultiuserSosServer;
 
 /**
@@ -19,7 +20,7 @@ public class MoveCommand extends AbstractCommand {
      * @param commandArgs the String commands for execution
      */
     public MoveCommand(String[] commandArgs) {
-        super(commandArgs,4);
+        super(commandArgs, ProgramConstants.FOURTUPLE);
 
     }
 

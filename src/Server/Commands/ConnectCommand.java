@@ -1,6 +1,7 @@
 package Server.Commands;
 
 import Common.MessageSource;
+import Common.ProgramConstants;
 import Server.MultiuserSosServer;
 
 /**
@@ -20,7 +21,8 @@ public class ConnectCommand extends AbstractCommand {
      * @param commandArgs the array of arguments for execution
      */
     public ConnectCommand(String[] commandArgs) {
-        super(commandArgs,2);
+        super(commandArgs,
+                ProgramConstants.TWOTUPLE);
     }
 
     /**

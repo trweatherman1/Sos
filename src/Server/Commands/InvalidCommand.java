@@ -1,6 +1,7 @@
 package Server.Commands;
 
 import Common.MessageSource;
+import Common.ProgramConstants;
 import Server.MultiuserSosServer;
 
 /**
@@ -20,7 +21,8 @@ public class InvalidCommand extends AbstractCommand implements
      * @param commandArgs the String commands for execution
      */
     public InvalidCommand(String[] commandArgs) {
-        super(commandArgs,0);
+        super(commandArgs,
+                ProgramConstants.NOARGS);
     }
 
     /**

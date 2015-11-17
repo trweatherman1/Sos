@@ -1,6 +1,7 @@
 package Server.Commands;
 
 import Common.MessageSource;
+import Common.ProgramConstants;
 import Server.MultiuserSosServer;
 
 /**
@@ -18,7 +19,8 @@ public class ChatCommand extends AbstractCommand implements CommandExecutable{
      * @param commandArgs the String commands for execution
      */
     public ChatCommand(String[] commandArgs) {
-        super(commandArgs, 2);
+        super(commandArgs,
+                ProgramConstants.TWOTUPLE);
     }
 
     /**

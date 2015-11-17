@@ -1,6 +1,7 @@
 package Server.Commands;
 
 import Common.MessageSource;
+import Common.ProgramConstants;
 import Server.MultiuserSosServer;
 
 /**
@@ -18,7 +19,8 @@ public class QuitCommand extends AbstractCommand {
      * @param commandArgs the String commands for execution
      */
     public QuitCommand(String[] commandArgs) {
-        super(commandArgs,0);
+        super(commandArgs,
+                ProgramConstants.NOARGS);
     }
 
     /**
