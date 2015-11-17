@@ -13,7 +13,7 @@ import java.util.Scanner;
  */
 public class MultiuserSosClientDriver {
     public static void main(String[] args) {
-        if (args.length < 1) {
+        if (args.length < 2) {
             System.out.println("Usage: java MultiUserSosClientDriver " +
                     "<host ip> <port> <nickname>");
         } else {
@@ -23,14 +23,13 @@ public class MultiuserSosClientDriver {
             multiuserSosClient.playGame();
             Scanner scanner = new Scanner(System.in);
             String command = "";
-            if(args.length > 2) {
-                multiuserSosClient.sendMessage("/connect " + args[2]);
-            }
+            multiuserSosClient.sendMessage("/connect " + args[2]);
             while (multiuserSosClient.isActive() && !command.toLowerCase().contains("quit")) {
                 command = scanner.nextLine();
                 multiuserSosClient.sendMessage(command);
             }
             multiuserSosClient.cleanUp();
+            System.out.println("Connection Ended");
         }
 
     }
