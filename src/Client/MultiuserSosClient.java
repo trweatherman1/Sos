@@ -79,7 +79,7 @@ public class MultiuserSosClient extends MessageSource implements
      */
     @Override
     public void sourceClosed(MessageSource source) {
-
+        this.active = false;
     }
 
     /**
@@ -123,8 +123,8 @@ public class MultiuserSosClient extends MessageSource implements
 
 
     public void cleanUp() {
-        sendMessage("/quit");
-        networkInterface.setConnected(false);
+        this.active = false;
+        networkInterface.sendMessage("/quit");
     }
 
 }
