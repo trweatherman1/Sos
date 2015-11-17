@@ -145,6 +145,9 @@ public class MultiuserSosServer implements MessageListener {
                 case "/quit":
                     command = new QuitCommand(parsedCommand);
                     break;
+                case "/chat":
+                    command = new ChatCommand(parsedCommand);
+                    break;
                 default:
                     command = new InvalidCommand(parsedCommand);
             }
@@ -284,5 +287,21 @@ public class MultiuserSosServer implements MessageListener {
         this.inGame = false;
         broadcast("\n-----------Game Over---------------");
         showScore();
+    }
+
+    public void chat(String message, MessageSource source, String receiver) {
+        if(receiver.toLowerCase().equals("all")) {
+            for (NetworkInterface player : connectedPlayers.values()) {
+                player.sendMessage(getPlayerName(source) + ": " + message);
+            }
+            System.out.println(getPlayerName(source) + ": " + message);
+        } else {
+            NetworkInterface recipient = connectedPlayers.get(receiver);
+            if(recipient != null) {
+                connectedPlayers.get(receiver).sendMessage(getPlayerName(source) + ": " + message);
+            } else {
+                privateMessage(receiver + " is not a connected player",source);
+            }
+        }
     }
 }

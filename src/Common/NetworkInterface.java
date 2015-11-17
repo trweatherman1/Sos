@@ -59,6 +59,7 @@ public class NetworkInterface extends MessageSource implements Runnable {
             }
         } catch (IOException e) {
             System.out.println("IOException: " + e.getMessage());
+            sendMessage("/quit");
         }
     }
 
@@ -75,6 +76,7 @@ public class NetworkInterface extends MessageSource implements Runnable {
             send.flush();
         } catch (IOException e) {
             System.out.println("IOException: " + e.getMessage());
+            connected = false;
         }
     }
 
