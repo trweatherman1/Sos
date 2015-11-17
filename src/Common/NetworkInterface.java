@@ -79,8 +79,10 @@ public class NetworkInterface extends MessageSource implements Runnable {
         }
     }
 
+
     public void setConnected(boolean isConnected) {
         this.connected = isConnected;
     }
+
 
 }

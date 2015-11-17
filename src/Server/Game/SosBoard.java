@@ -45,7 +45,7 @@ public class SosBoard {
      *
      * @param row  the horizontal spaces on the board
      * @param col  the vertical spaces on the board
-     * @param icon the character that will take up the space on the board
+     * @param icon the character that will take up the space on the board/s
      * @return false if a result has nothing in it, else return true if there is result has something in it
      */
     public boolean setSpot(int row, int col, char icon) {
@@ -146,11 +146,11 @@ public class SosBoard {
     private int checkODiagCompass(int row, int col, char letter) {
         int points = 0;
         if (hasSE(row, col, letter) && hasNW(row, col, letter)) {
-            if (hasO(board[row + 1][col], board[row - 1][col])) {
+            if (hasO(board[row - 1][col - 1], board[row + 1][col + 1])) {
                 points++;
             }
         } else if (hasSW(row, col, letter) && hasNE(row, col, letter)) {
-            if (hasO(board[row][col - 1], board[row][col + 1])) {
+            if (hasO(board[row + 1][col - 1], board[row - 1][col + 1])) {
                 points++;
             }
         }
