@@ -4,6 +4,8 @@ import Common.MessageSource;
 import Common.ProgramConstants;
 import Server.MultiuserSosServer;
 
+import java.util.Arrays;
+
 /**
  * This class allows chatting within the game, private or broadcast
  *
@@ -32,7 +34,10 @@ public class ChatCommand extends AbstractCommand implements CommandExecutable{
     @Override
     public void execute(MultiuserSosServer server, MessageSource messageSource) {
         if(commandArgs.length > 2) {
-            server.chat(commandArgs[1],messageSource,commandArgs[2]);
+            String[] message = Arrays.copyOfRange(commandArgs, 1, commandArgs
+                    .length - 1);
+            server.chat(String.join(" ", message), messageSource, commandArgs[commandArgs
+                    .length]);
         } else {
             server.chat(commandArgs[1],messageSource,"all");
         }
