@@ -170,6 +170,15 @@ public class SosBoard {
         return points;
     }
 
+    /**
+     * Checks the if there is a letter S and if the there is an O and an S to the northwest, southwest,
+     * northeast and southeast
+     *
+     * @param row  the horizontal spaces on the board
+     * @param col  the vertical spaces on the board
+     * @param letter the character that will take up the space on the board/s
+     * @return return points is there is an SOS made
+     */
     private int checkSDiagCompass(int row, int col, char letter) {
         int points = 0;
         if (hasNW(row, col, letter)) {
@@ -195,6 +204,14 @@ public class SosBoard {
         return points;
     }
 
+    /**
+     * Checks the if there is a letter S and if the there is an O and an S to the north, south, east and west
+     *
+     * @param row  the horizontal spaces on the board
+     * @param col  the vertical spaces on the board
+     * @param letter the character that will take up the space on the board/s
+     * @return return points is there is an SOS made
+     */
     private int checkSCompass(int row, int col, char letter) {
         int points = 0;
         if (hasSouth(row, letter)) {
@@ -220,6 +237,14 @@ public class SosBoard {
         return points;
     }
 
+    /**
+     * Checks the if there is a letter O and if the there is an s to the north, south, east and west
+     *
+     * @param row  the horizontal spaces on the board
+     * @param col  the vertical spaces on the board
+     * @param letter the character that will take up the space on the board/s
+     * @return return points is there is an SOS made
+     */
     private int checkOCompass(int row, int col, char letter) {
         int points = 0;
         if (hasNorth(row, letter) && hasSouth(row, letter)) {

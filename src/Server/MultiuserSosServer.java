@@ -237,10 +237,10 @@ public class MultiuserSosServer implements MessageListener {
      * place an icon at is invalid, valid or if it's not the user's turn.
      * Displays the score and the board
      *
-     * @param row
-     * @param col
-     * @param icon
-     * @param player
+     * @param row the horizontal spaces on the game board
+     * @param col the vertical spaces on the game board
+     * @param icon the letter that the player enters in the spaces
+     * @param player the person playing the game
      */
     public void move(int row, int col, char icon, String player) {
         int returnCode = currentGame.move(row, col, icon, player);
@@ -259,18 +259,33 @@ public class MultiuserSosServer implements MessageListener {
         }
     }
 
+    /**
+     * Broadcasts the scores for the current game to everyone playing
+     */
     public void showScore() {
         broadcast("\n" + currentGame.displayScore());
     }
 
+    /**
+     * Broadcasts the winner with the highest score to everyone playing
+     */
     public void showHighScore() {
         broadcast("\n" + currentGame.highScore());
     }
 
+    /**
+     * Displays the board to everyone playing
+     */
     public void displayBoard() {
         broadcast("\n" + currentGame.toString());
     }
 
+    /**
+     * A method that gets the player's name when they connect to the server
+     *
+     * @param messageSource is the what the user passes in with the command line arguments for /connect
+     * @return A String of the player's name
+     */
     public String getPlayerName(MessageSource messageSource) {
         String playerName = "Player Not Found";
         for (String name : connectedPlayers.keySet().toArray(new String[connectedPlayers.size()])) {
@@ -281,14 +296,25 @@ public class MultiuserSosServer implements MessageListener {
         return playerName;
     }
 
+    /**
+     * Broadcasts to all the players who's turn it is
+     */
     public void displayCurrentPlayer() {
         broadcast(currentGame.getCurrentPlayer() + "'s turn.");
     }
 
+    /**
+     * A method that checks to see if a game is already in process
+     *
+     * @return a boolean false if a game is not running, true if the game is running
+     */
     public boolean isInGame() {
         return inGame;
     }
 
+    /**
+     * A method to check and see if the game is over. will displays the scores and show the winner and high score
+     */
     public void endGame() {
         if (inGame) {
             this.inGame = false;
@@ -299,6 +325,12 @@ public class MultiuserSosServer implements MessageListener {
         }
     }
 
+    /**
+     * An extra method that will allow users to communicate with one another
+     *
+     * @param message The message that the user is going to send
+     * @param source the player that will be sending the message
+     */
     public void chat(String message, MessageSource source) {
         for (NetworkInterface player : connectedPlayers.values()) {
             player.sendMessage(getPlayerName(source) + ": " + message);

@@ -79,7 +79,11 @@ public class NetworkInterface extends MessageSource implements Runnable {
         }
     }
 
-
+    /**
+     * A method that takes in a boolean to see if a user is connected
+     *
+     * @param isConnected a boolean to see if the user is connected to the server
+     */
     public void setConnected(boolean isConnected) {
         this.connected = isConnected;
     }
