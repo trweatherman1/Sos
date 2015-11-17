@@ -43,10 +43,14 @@ public class MultiuserSosServer implements MessageListener {
      */
     private int port;
 
-    /**size of the board*/
+    /**
+     * size of the board
+     */
     private int size;
 
-    /** This boolean determines if the game is going on or not */
+    /**
+     * This boolean determines if the game is going on or not
+     */
     private boolean inGame;
 
     /**
@@ -115,7 +119,7 @@ public class MultiuserSosServer implements MessageListener {
      */
     @Override
     public void sourceClosed(MessageSource source) {
-        if(source instanceof NetworkInterface) {
+        if (source instanceof NetworkInterface) {
             //((NetworkInterface) source).setConnected(false);
         }
         this.connectedPlayers.remove(source);
@@ -152,7 +156,7 @@ public class MultiuserSosServer implements MessageListener {
                 default:
                     command = new InvalidCommand(parsedCommand);
             }
-            if(parsedCommand.length >= command.getNumArgs()) {
+            if (parsedCommand.length >= command.getNumArgs()) {
                 command.execute(this, source);
             } else {
                 privateMessage(parsedCommand[0] + " requires " + command
@@ -245,13 +249,12 @@ public class MultiuserSosServer implements MessageListener {
         int returnCode = currentGame.move(row, col, icon, player);
         if (returnCode == 1) {
             broadcast("Invalid Move");
-        }
-        else if(returnCode == 2) {
-            privateMessage("Not your turn",connectedPlayers.get(player));
+        } else if (returnCode == 2) {
+            privateMessage("Not your turn", connectedPlayers.get(player));
         } else {
             showScore();
             displayBoard();
-            if(returnCode == 3) {
+            if (returnCode == 3) {
                 endGame();
             } else {
                 displayCurrentPlayer();
@@ -263,7 +266,7 @@ public class MultiuserSosServer implements MessageListener {
         broadcast("\n" + currentGame.displayScore());
     }
 
-    public void showHighScore(){
+    public void showHighScore() {
         broadcast("\n" + currentGame.highScore());
     }
 
@@ -273,8 +276,8 @@ public class MultiuserSosServer implements MessageListener {
 
     public String getPlayerName(MessageSource messageSource) {
         String playerName = "Player Not Found";
-        for(String name : connectedPlayers.keySet().toArray(new String[connectedPlayers.size()])) {
-            if(connectedPlayers.get(name).equals(messageSource)) {
+        for (String name : connectedPlayers.keySet().toArray(new String[connectedPlayers.size()])) {
+            if (connectedPlayers.get(name).equals(messageSource)) {
                 playerName = name;
             }
         }
@@ -290,7 +293,7 @@ public class MultiuserSosServer implements MessageListener {
     }
 
     public void endGame() {
-        if(inGame) {
+        if (inGame) {
             this.inGame = false;
             broadcast("\n-----------Game Over---------------");
             showScore();
@@ -299,19 +302,10 @@ public class MultiuserSosServer implements MessageListener {
         }
     }
 
-    public void chat(String message, MessageSource source, String receiver) {
-        if(receiver.toLowerCase().equals("all")) {
-            for (NetworkInterface player : connectedPlayers.values()) {
-                player.sendMessage(getPlayerName(source) + ": " + message);
-            }
-            System.out.println(getPlayerName(source) + ": " + message);
-        } else {
-            NetworkInterface recipient = connectedPlayers.get(receiver);
-            if(recipient != null) {
-                connectedPlayers.get(receiver).sendMessage(getPlayerName(source) + ": " + message);
-            } else {
-                privateMessage(receiver + " is not a connected player",source);
-            }
+    public void chat(String message, MessageSource source) {
+        for (NetworkInterface player : connectedPlayers.values()) {
+            player.sendMessage(getPlayerName(source) + ": " + message);
         }
+        System.out.println(getPlayerName(source) + ": " + message);
     }
 }

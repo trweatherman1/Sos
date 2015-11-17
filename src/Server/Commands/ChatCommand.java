@@ -33,13 +33,9 @@ public class ChatCommand extends AbstractCommand implements CommandExecutable{
      */
     @Override
     public void execute(MultiuserSosServer server, MessageSource messageSource) {
-        if(commandArgs.length > 2) {
+
             String[] message = Arrays.copyOfRange(commandArgs, 1, commandArgs
-                    .length - 1);
-            server.chat(String.join(" ", message), messageSource, commandArgs[commandArgs
-                    .length]);
-        } else {
-            server.chat(commandArgs[1],messageSource,"all");
-        }
+                    .length);
+        server.chat(String.join(" ", message), messageSource);
     }
 }
