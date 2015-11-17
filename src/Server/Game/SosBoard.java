@@ -143,6 +143,17 @@ public class SosBoard {
         return points;
     }
 
+
+    /**
+     * A method that checks to see if the board has icons that go to the southeast, northwest, southwest and northeast
+     *
+     * @param row
+     * @param letter
+     * @return
+     * @param row the horizontal spaces on the game board
+     * @param letter the letter that will be entered in a space on the board
+     * @return the letter if it's in bound by 1 or else if it's in bound by 2
+     */
     private int checkODiagCompass(int row, int col, char letter) {
         int points = 0;
         if (hasSE(row, col, letter) && hasNW(row, col, letter)) {

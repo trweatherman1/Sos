@@ -124,6 +124,10 @@ public class MultiuserSosClient extends MessageSource implements
     }
 
 
+    /**
+     * A method that cleans up the connection to the server
+     *
+     */
     public void cleanUp() {
         this.active = false;
         networkInterface.sendMessage("/quit");

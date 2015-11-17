@@ -99,6 +99,11 @@ public class Game {
         return message;
     }
 
+    /**
+     * A method that displays the high score of the user
+     *
+     * @return String message that returns the player with the highest score and their points
+     */
     public String highScore() {
         String message = "";
         if (board.isFull()) {
@@ -106,7 +111,7 @@ public class Game {
             for (int i = 1; i < numPlayers; i++) {
                 if (scores[i] > scores[highScore])
                     highScore = i;
-                message = "Player " + players[i] + " wins with " + scores[highScore] + " points";
+                message = "Player " + players[highScore] + " wins with " + scores[highScore] + " points";
             }
         }
         return message;
@@ -130,6 +135,11 @@ public class Game {
         return text;
     }
 
+    /**
+     * A method that tells who the current player is
+     *
+     * @return a Sting with the name of the current player
+     */
     public String getCurrentPlayer() {
         return players[currentPlayer];
     }
