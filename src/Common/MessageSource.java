@@ -54,7 +54,7 @@ public abstract class MessageSource {
             try {
                 listener.messageReceived(message, this);
             } catch (RuntimeException ex) {
-                ex.printStackTrace();
+                System.out.println("RuntimeException: " + ex.getMessage());
             }
         }
     }

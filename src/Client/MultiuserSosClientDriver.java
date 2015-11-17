@@ -23,7 +23,11 @@ public class MultiuserSosClientDriver {
             multiuserSosClient.playGame();
             Scanner scanner = new Scanner(System.in);
             String command = "";
-            while (!command.toLowerCase().contains("quit") && multiuserSosClient.isActive()) {
+            if(args.length > 2) {
+                multiuserSosClient.sendMessage("/connect " + args[2]);
+            }
+            while (multiuserSosClient.isActive() && !command.toLowerCase()
+                    .contains("quit")) {
                 command = scanner.nextLine();
                 multiuserSosClient.sendMessage(command);
             }
