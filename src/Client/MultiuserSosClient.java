@@ -126,7 +126,6 @@ public class MultiuserSosClient extends MessageSource implements
         this.active = false;
         networkInterface.sendMessage("/quit");
         networkInterface.setConnected(false);
-        networkInterface.removeMessageListener(this);
     }
 
 }
