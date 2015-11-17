@@ -21,15 +21,17 @@ public class MultiuserSosClientDriver {
                     (args[0], args.length == 2 ? Integer.parseInt(args[1]) :
                             ProgramConstants.DEFAULTPORT);
             multiuserSosClient.playGame();
-            Scanner scanner = new Scanner(System.in);
-            String command = "";
-            multiuserSosClient.sendMessage("/connect " + args[2]);
-            while (multiuserSosClient.isActive() && !command.toLowerCase().contains("quit")) {
-                command = scanner.nextLine();
-                multiuserSosClient.sendMessage(command);
+            if (multiuserSosClient.isActive()) {
+                Scanner scanner = new Scanner(System.in);
+                String command = "";
+                multiuserSosClient.sendMessage("/connect " + args[2]);
+                while (multiuserSosClient.isActive() && !command.toLowerCase().contains("quit")) {
+                    command = scanner.nextLine();
+                    multiuserSosClient.sendMessage(command);
+                }
+                multiuserSosClient.cleanUp();
+                System.out.println("Connection Ended");
             }
-            multiuserSosClient.cleanUp();
-            System.out.println("Connection Ended");
         }
 
     }

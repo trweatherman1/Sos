@@ -109,6 +109,7 @@ public class MultiuserSosClient extends MessageSource implements
             clientThread.start();
             this.active = true;
         } catch (IOException e) {
+            System.out.println("IOException: " + e.getMessage());
             this.active = false;
         }
     }
