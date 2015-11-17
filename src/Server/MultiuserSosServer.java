@@ -5,6 +5,7 @@ import Common.MessageSource;
 import Common.NetworkInterface;
 import Server.Commands.*;
 import Server.Game.Game;
+
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -154,7 +155,8 @@ public class MultiuserSosServer implements MessageListener {
             if(parsedCommand.length >= command.getNumArgs()) {
                 command.execute(this, source);
             } else {
-                privateMessage(parsedCommand[0] + "requires " + command.getNumArgs() + "arguments",
+                privateMessage(parsedCommand[0] + " requires " + command
+                                .getNumArgs() + " arguments",
                         source);
             }
         } else {
