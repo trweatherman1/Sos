@@ -115,7 +115,7 @@ public class SosBoard {
         int points = 0;
         char letter = Character.toLowerCase(board[row][col]);
         if (letter == 'o') {
-            points += checkOCompass(row,col,letter);
+            points += checkOCompass(row, col, letter);
         }
         if (letter == 's') {
             points += checkSCompass(row, col, letter);

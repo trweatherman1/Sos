@@ -35,6 +35,7 @@ public abstract class AbstractCommand implements CommandExecutable {
     /**
      * A method that will get the number of arguments the command line will accept when a given
      * command is called
+     *
      * @return numArgs, number of arguments from the command line
      */
     public int getNumArgs() {

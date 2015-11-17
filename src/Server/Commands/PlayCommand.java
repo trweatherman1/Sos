@@ -33,10 +33,9 @@ public class PlayCommand extends AbstractCommand {
     public void execute(MultiuserSosServer server, MessageSource messageSource) {
         if (server.numConnectedClients() < 2) {
             server.broadcast("Not enough players for a game");
-        }
-        else if(server.isInGame()) {
+        } else if (server.isInGame()) {
             server.broadcast("The game is already running");
-        }else {
+        } else {
             server.setupGame();
         }
     }

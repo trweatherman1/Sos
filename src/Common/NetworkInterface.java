@@ -30,7 +30,7 @@ public class NetworkInterface extends MessageSource implements Runnable {
     /**
      * A constructor for the NetworkInterface Class takes in parameters send and receive
      *
-     * @param send an output stream that will be sent from the client
+     * @param send    an output stream that will be sent from the client
      * @param receive an input stream that will be received by the server
      */
     public NetworkInterface(OutputStream send, InputStream receive) {

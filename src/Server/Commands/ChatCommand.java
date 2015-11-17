@@ -13,7 +13,7 @@ import java.util.Arrays;
  * @author Trent Weatherman
  * @version 1.0
  */
-public class ChatCommand extends AbstractCommand implements CommandExecutable{
+public class ChatCommand extends AbstractCommand implements CommandExecutable {
     /**
      * This constructor takes in an array of String arguments which can be
      * variable in size, for all commands
@@ -34,8 +34,8 @@ public class ChatCommand extends AbstractCommand implements CommandExecutable{
     @Override
     public void execute(MultiuserSosServer server, MessageSource messageSource) {
 
-            String[] message = Arrays.copyOfRange(commandArgs, 1, commandArgs
-                    .length);
+        String[] message = Arrays.copyOfRange(commandArgs, 1, commandArgs
+                .length);
         server.chat(String.join(" ", message), messageSource);
     }
 }

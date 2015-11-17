@@ -11,12 +11,12 @@ import Common.ProgramConstants;
  */
 public class MultiuserSosServerDriver {
     public static void main(String args[]) {
-        if(args.length < 1) {
+        if (args.length < 1) {
             System.out.println("Usage: <port> |size|");
         } else {
             MultiuserSosServer multiuserSosServer = new MultiuserSosServer
-                    (Integer.parseInt(args[0]), args.length==2?Integer.parseInt(args[1])
-                            :ProgramConstants.DEFAULTSIZE);
+                    (Integer.parseInt(args[0]), args.length == 2 ? Integer.parseInt(args[1])
+                            : ProgramConstants.DEFAULTSIZE);
             multiuserSosServer.listen();
         }
     }

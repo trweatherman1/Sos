@@ -11,19 +11,29 @@ import Common.ProgramConstants;
  */
 
 public class Game {
-    /** Current player. From 0 to n*/
+    /**
+     * Current player. From 0 to n
+     */
     private int currentPlayer;
 
-    /**Hold the scores of all the players */
+    /**
+     * Hold the scores of all the players
+     */
     private int[] scores;
 
-    /** The sos board*/
+    /**
+     * The sos board
+     */
     private SosBoard board;
 
-    /** Current allowed number of player */
+    /**
+     * Current allowed number of player
+     */
     private int numPlayers;
 
-    /** The String array that the players usernames are stored in*/
+    /**
+     * The String array that the players usernames are stored in
+     */
     private String[] players;
 
     /**
@@ -48,24 +58,23 @@ public class Game {
     }
 
     /**
-     *
      * A method that will determine the movement of the player.
      * This will calculate the position on the board, the icon the user wants to use
      * and calulate the points the user will be getting (if any).
      *
-     * @param row the row that the move is to
-     * @param col the column that the move is on
-     * @param icon the character used
+     * @param row    the row that the move is to
+     * @param col    the column that the move is on
+     * @param icon   the character used
      * @param player the player that made the move
      * @return the number of points received for the turn
      */
-    public int move(int row, int col, char icon,String player) {
+    public int move(int row, int col, char icon, String player) {
         int message;
-        if(player.equals(players[currentPlayer])) {
-            if(board.setSpot(row,col,icon)) {
+        if (player.equals(players[currentPlayer])) {
+            if (board.setSpot(row, col, icon)) {
                 scores[currentPlayer] += board.calculatePoints(row, col);
                 changePlayer();
-                message = board.isFull()?ProgramConstants.FULLBOARD:ProgramConstants.VALIDMOVE;
+                message = board.isFull() ? ProgramConstants.FULLBOARD : ProgramConstants.VALIDMOVE;
             } else {
                 message = ProgramConstants.INVALIDMOVE;
             }
@@ -90,14 +99,14 @@ public class Game {
         return message;
     }
 
-    public String highScore(){
+    public String highScore() {
         String message = "";
-        if(board.isFull()) {
+        if (board.isFull()) {
             int highScore = 0;
             for (int i = 1; i < numPlayers; i++) {
                 if (scores[i] > scores[highScore])
                     highScore = i;
-                    message = "Player " + players[i] + " wins with " + scores[highScore] + " points";
+                message = "Player " + players[i] + " wins with " + scores[highScore] + " points";
             }
         }
         return message;
@@ -112,9 +121,10 @@ public class Game {
 
     /**
      * A method that will print out the board we want
+     *
      * @return text that will be designated for the board
      */
-    public String toString(){
+    public String toString() {
         String text = "";
         text += board;
         return text;

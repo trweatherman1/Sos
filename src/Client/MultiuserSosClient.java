@@ -34,7 +34,9 @@ public class MultiuserSosClient extends MessageSource implements
      */
     private NetworkInterface networkInterface;
 
-    /** This is the boolean for if the client is still connected */
+    /**
+     * This is the boolean for if the client is still connected
+     */
     private boolean active;
 
     /**
