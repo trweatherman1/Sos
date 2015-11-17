@@ -149,7 +149,8 @@ public class SosBoard {
             if (hasO(board[row - 1][col - 1], board[row + 1][col + 1])) {
                 points++;
             }
-        } else if (hasSW(row, col, letter) && hasNE(row, col, letter)) {
+        }
+        if (hasSW(row, col, letter) && hasNE(row, col, letter)) {
             if (hasO(board[row + 1][col - 1], board[row - 1][col + 1])) {
                 points++;
             }
